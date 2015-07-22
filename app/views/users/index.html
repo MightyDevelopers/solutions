@@ -1,0 +1,84 @@
+<script type="text/javascript">
+    
+
+    var createUser = function(){
+        $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/users/createUser",
+        data: {Login: "(O_O)", Password: "password"}
+        }).success(function (data){
+            console.log(data);
+        })
+    }
+
+    var getUser = function(){
+        $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/users/getUser",
+        data: {Login: "tony", Password: "password"}
+        }).success(function (data){
+            console.log(data);
+        })
+    }
+
+    var updateProfile = function(){
+        $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/users/updateProfile",
+        data: {Login:"irunka", Email: "blondunka@gmail.com", FirstName:"Iruna", 
+               LastName: "Kylikova", ProfileImgPath:"none", Facebook:"none", 
+               Age:"20", Sex: "F", IsPrivate: "\x00"}
+        }).success(function (data){
+            console.log(data);
+        })
+    }
+
+    var changeLogin = function(){
+        $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/users/changeLogin",
+        data: {Login: "anton", Password: "password", New_login: "tony"}
+        }).success(function (data){
+            console.log(data);
+        })
+    }
+
+
+    var changePassword = function(){
+        $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/users/changePassword",
+        data: {Login: "bobCS", Password: "bob", New_password: "password"}
+        }).success(function (data){
+            console.log(data);
+        })
+    }
+
+    var deleteUser = function(){
+        $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/users/deleteUser",
+        data: {Login: "a", Password: "a"}
+        }).success(function (data){
+            console.log(data);
+        })
+    }   
+
+    var searchByName = function(){
+        $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/users/searchByName",
+        data: {username:"ad"}
+        }).success(function (data){
+            console.log(data);
+        })
+    }  
+
+    //createUser();
+    //getUser();
+    //updateProfile();
+    //changeLogin();
+    //changePassword();
+    //deleteUser();
+    //searchByName();
+</script>

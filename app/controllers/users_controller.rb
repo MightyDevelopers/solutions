@@ -1,43 +1,48 @@
 class UsersController < ApplicationController
   respond_to :json
 
-  def new
-    @user = User.new
+  def createUser
+    @user = User.Insert(params[:Login],params[:Password])
+    json_return(@user)
   end
 
-  def create
-    @user = User.new(user_params)
-    if @user.save
-        redirect_to @user
-    else render 'new'
-    end
+  def getUser
+    @user = User.Get(params[:Login],params[:Password])
+    json_return(@user)
   end
 
-  def show
-    @user = User.find(params[:id])
-    render json: @user
+  def updateProfile
+    User.UpdateProfile(params[:Login],params[:Email],params[:FirstName],
+                params[:LastName],params[:ProfileImgPath],params[:Facebook],
+                params[:Age],params[:Sex],params[:IsPrivate])
+    @user = User.find(params[:Login])
+    json_return(@user)
   end
 
-  def update_user
-      
+  def changeLogin
+    User.UpdateLogin(params[:Login],params[:Password],params[:New_login])
+    @user = User.Get(params[:New_login],params[:Password])
+    json_return(@user)
   end
 
-  def edit_profile
-      
+  def changePassword
+    User.UpdatePassword(params[:Login],params[:Password],params[:New_password])
+    @user = User.Get(params[:Login],params[:New_password])
+    json_return(@user)  
   end
 
-  def change_login
-      
+  def deleteUser
+    @user = User.Delete(params[:Login],params[:Password])
+    json_return(@user)
   end
 
-  def change_password
-      
+  def searchByName
+    @user = User.SearchUsersByName(params[:Username])
+    json_return(@user)
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:Login, :Password)
+  def json_return(param)
+    render json: param
   end
 
 end

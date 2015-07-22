@@ -1,11 +1,21 @@
 Rails.application.routes.draw do
-  resources :users
+  # resources :users
 
-  # get 'users/new'
+  post 'users/getUser' 
 
-  # get 'users/show' 
+  get 'users/index'
 
-  # get 'users/all'
+  post 'users/create'
+
+  post 'users/updateProfile'
+
+  post 'users/changeLogin'
+
+  post 'users/changePassword'
+
+  post 'users/deleteUser'
+
+  post 'users/searchByName'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
