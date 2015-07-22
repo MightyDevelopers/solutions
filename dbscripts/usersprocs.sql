@@ -5,55 +5,57 @@ DELIMITER //
 CREATE PROCEDURE GetUser
 (
     IN login        NVARCHAR(255),
-    IN `password`   NVARCHAR(255)
+    IN password   NVARCHAR(255)
 )
 BEGIN
     SELECT Email, FirstName, LastName, ProfileImgPath, Facebook, Age, Sex, IsPrivate
     FROM Users
-    WHERE Users.Login = login AND Users.`Password` = `password`;
+    WHERE Users.Login = login AND Users.Password = password;
 END//
 
 CREATE PROCEDURE InsertUser
 (
     IN login        NVARCHAR(255),
-    IN `password`   NVARCHAR(255)
+    IN password   NVARCHAR(255)
 )
 BEGIN
-    INSERT INTO Users(Login, `Password`)
-    VALUES(login, `password`);
+    INSERT INTO Users(Login, Password)
+    VALUES(login, password);
 END//
 
 CREATE PROCEDURE UpdateUserPassword
 (
     IN login        NVARCHAR(255),
-    IN `password`   NVARCHAR(255)
+    IN password   NVARCHAR(255),
+    IN new_password NVARCHAR(255)
 )
 BEGIN
     UPDATE Users
-    SET Users.`Password` = `password`
-    WHERE Users.Login = login;
+    SET Users.Password = new_password
+    WHERE Users.Login = login AND Users.Password = password;
 END//
 
 CREATE PROCEDURE UpdateUserLogin
 (
     IN login        NVARCHAR(255),
-    IN `password`   NVARCHAR(255)
+    IN password   NVARCHAR(255),
+    IN new_login    NVARCHAR(255)
 )
 BEGIN
     UPDATE Users
-    SET Users.Login = login
-    WHERE Users.`Password` = `password`;
+    SET Users.Login = new_login
+    WHERE Users.Password = password AND Users.Login = login;
 END//
 
 CREATE PROCEDURE DeleteUser
 (
     IN login        NVARCHAR(255),
-    IN `password`   NVARCHAR(255)
+    IN password   NVARCHAR(255)
 )
 BEGIN
     DELETE FROM Users
     WHERE Users.Login = login 
-        AND Users.`Password` = `password`;
+        AND Users.Password = password;
 END//
 
 CREATE PROCEDURE UpdateUserProfile
