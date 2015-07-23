@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
+  validates :Login, presence: true,
+                    uniqueness: true
+
+
   scope :Get, lambda { |login, password| 
    select(:Email, :FirstName, :LastName, :ProfileImgPath, :Facebook, :Age, :Sex, 
     :IsPrivate).
-  where(:Login => login , :Password => password ).first }
+  where(:Login => login , :Password => password ) }
 
   scope :Insert, lambda { |login, password| 
     create(:Login => login, :Password => password) }

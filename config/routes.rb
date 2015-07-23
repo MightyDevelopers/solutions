@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   # resources :users
 
+  root 'users#index'
   post 'users/getUser' 
 
-  get 'users/index'
-
-  post 'users/create'
+  post 'users/createUser'
 
   post 'users/updateProfile'
 
