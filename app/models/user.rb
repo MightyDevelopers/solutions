@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
     delete_all(:Login => login, :Password => password) }
 
   scope :UpdateProfile, lambda { |login, email, firstName,lastName, profileImgPath, facebook, age, sex, isPrivate|
-    update(login, Email: email,
+    where(:Login => login).update_all(Email: email,
     FirstName: firstName, LastName: lastName, 
     ProfileImgPath: profileImgPath, Facebook: facebook, Age: age,
     Sex: sex, IsPrivate: isPrivate ) }
