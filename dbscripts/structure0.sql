@@ -6,7 +6,7 @@ USE Solutions;
 CREATE TABLE Users 
 (
 	Login 			NVARCHAR(255) 	NOT NULL PRIMARY KEY,
-    `Password` 		NVARCHAR(255) 	NOT NULL UNIQUE,
+    password_digest	NVARCHAR(255) 	NOT NULL UNIQUE,
     Email 			NVARCHAR(255),
     FirstName 		NVARCHAR(35),
     LastName 		NVARCHAR(35),

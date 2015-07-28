@@ -59,6 +59,10 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     debug_inspector (0.0.2)
+    dnsruby (1.58.0)
+    email_verifier (0.0.9)
+      dnsruby (>= 1.5)
+      rails (>= 3.0.0)
     erubis (2.7.0)
     execjs (2.5.2)
     globalid (0.3.5)
@@ -159,6 +163,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   coffee-rails (= 4.1.0)
+  email_verifier
   jbuilder
   jquery-rails
   json (~> 1.8.3)

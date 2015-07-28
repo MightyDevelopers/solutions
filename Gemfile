@@ -16,6 +16,7 @@ gem 'uglifier'
 gem 'coffee-rails', '4.1.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'responders', '~> 2.0'
+gem 'email_verifier'
 
 group :development, :test do
   gem 'byebug'

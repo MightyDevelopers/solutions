@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   # resources :users
+  resources :sessions, only:[:new, :create, :destroy]
 
   root 'users#index'
+
+  post 'sessions/new'
+
+  delete 'sessions/destroy'
+
   post 'users/getUser' 
 
   post 'users/createUser'

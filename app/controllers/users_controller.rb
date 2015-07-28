@@ -7,12 +7,14 @@ class UsersController < ApplicationController
       @message += ["Login can't be empty"]
     elsif params[:Password].nil? || params[:Password].empty? 
       @message += ["Password can't be empty"]
-    end 
+    end
     if !@message.empty?
       json_return(@message)
     else
-      @user = User.Insert(params[:Login],params[:Password])  
+      @user = User.Insert(params[:Login],params[:Password])
       if @user.valid?
+        sign_in @user
+        @user = User.Get(params[:Login]).first
         json_return(@user)
       else json_return(@user.errors.full_messages)
       end
@@ -28,13 +30,15 @@ class UsersController < ApplicationController
     end 
     if !@message.empty?
       json_return(@message)  
-    else      
-      @user = User.Get(params[:Login],params[:Password])
-      if @user.empty?
-        @message = ["Can't find this user"]
-        json_return(@message)
+    else 
+      @user = User.find_by_Login(params[:Login])
+      if @user && @user.authenticate(params[:Password])
+        @user=User.Get(params[:Login]).first
+        sign_in @user
+        json_return(@user)
       else
-        json_return(@user)  
+        @message += ["Can't find this user"]
+        json_return(@message)
       end
     end
   end
@@ -45,40 +49,67 @@ class UsersController < ApplicationController
       @message += ["Login can't be empty"] 
     end
     if params[:Email].nil? || params[:Email].empty? 
-      @message += ["Email can't be empty"]
+      params[:Email] = nil
+    else 
+      begin
+        if EmailVerifier.check(params[:Email]) == false
+          @message += ["Email not valid"]
+        end
+      rescue Exception => e
+        @message += ["Email not valid"]
+      end
     end
     if params[:FirstName].nil? || params[:FirstName].empty? 
-      @message += ["FirstName can't be empty"]
+      params[:FirstName] = nil
     end
     if params[:LastName].nil? || params[:LastName].empty? 
-      @message += ["LastName can't be empty"]
+      params[:LastName] = nil
     end
     if params[:ProfileImgPath].nil? || params[:ProfileImgPath].empty? 
-      @message += ["ProfileImgPath can't be empty"]
+      params[:ProfileImgPath] = nil
     end
     if params[:Facebook].nil? || params[:Facebook].empty? 
-      @message += ["Facebook can't be empty"]
+      params[:Facebook] = nil
     end
     if params[:Age].nil? || params[:Age].empty? 
-      @message += ["Age can't be empty"]
+      params[:Age] = nil
+    else 
+      params[:Age]=params[:Age].to_i
+      if params[:Age] <= 0
+        @message += ["Age mast be numeric or > 0"]
+      end
     end
     if params[:Sex].nil? || params[:Sex].empty? 
-      @message += ["Sex can't be empty"]
+      params[:Sex] = nil
+    elsif params[:Sex].length>1 || params[:Sex]!= "M" ||
+          params[:Sex]!= "F" || params[:Sex]!= "N"
+      params[:Sex] = nil
     end
     if params[:IsPrivate].nil? || params[:IsPrivate].empty? 
-      @message += ["IsPrivate can't be empty"]
+      params[:IsPrivate] = "\x00"
+    elsif params[:IsPrivate] == "true"
+      params[:IsPrivate] = "\x01"
+    elsif params[:IsPrivate] == "false" 
+      params[:IsPrivate] = "\x00"
+    else params[:IsPrivate] = "\x00"
     end
     if !@message.empty?
       json_return(@message)  
     else 
-      status = User.UpdateProfile(params[:Login],params[:Email],params[:FirstName],
-                                  params[:LastName],params[:ProfileImgPath],params[:Facebook],
-                                  params[:Age],params[:Sex],params[:IsPrivate])
-      if status == 1
-        @user = User.find(params[:Login])
-        json_return(@user)  
+      if sign_in?
+        @user = User.find_by_Login(params[:Login])
+        if @user
+          User.UpdateProfile(params[:Login],params[:Email],params[:FirstName],
+                      params[:LastName],params[:ProfileImgPath],params[:Facebook],
+                      params[:Age],params[:Sex],params[:IsPrivate])
+          @user = User.Get(params[:Login]).first
+          json_return(@user)  
+        else
+          @message =["Somesing wrong(maybe login is invalid)"]
+          json_return(@message)
+        end
       else
-        @message =["Somesing wrong(maybe login is invalid)"]
+        @message = ["You dont have permisions. Please sign in"]
         json_return(@message)
       end
     end
@@ -92,19 +123,27 @@ class UsersController < ApplicationController
     if params[:Password].nil? || params[:Password].empty? 
       @message += ["Password can't be empty"]
     end
-    if params[:New_login].nil? || params[:New_login].empty? 
-      @message += ["New_login can't be empty"]
+    if params[:New_login].nil? || params[:New_login].empty? ||
+       params[:New_login] == params[:Login]
+      @message += ["New_login invalid or empty"]
     end
     if !@message.empty?
       json_return(@message)  
     else      
-      status = User.UpdateLogin(params[:Login],params[:Password],params[:New_login])
-      if status == 1 
-        @user = User.Get(params[:New_login],params[:Password])
-        json_return(@user)    
-      else 
-        @message = ["Somesing wrong(maybe login/password/new_login is invalid)"]    
-        json_return(@message)    
+      if sign_in?
+        @user = User.find_by_Login(params[:Login])
+        if @user && @user.authenticate(params[:Password])
+          User.UpdateLogin(params[:Login],params[:New_login])
+          @user = User.Get(params[:New_login]).first
+          sign_in @user
+          json_return(@user)    
+        else 
+          @message = ["Somesing wrong(maybe login/password/new_login is invalid)"]    
+          json_return(@message)    
+        end
+      else
+        @message = ["You dont have permisions. Please sign in"]
+        json_return(@message)
       end
     end
   end
@@ -117,20 +156,27 @@ class UsersController < ApplicationController
     if params[:Password].nil? || params[:Password].empty? 
       @message += ["Password can't be empty"]
     end
-    if params[:New_password].nil? || params[:New_password].empty? 
-      @message += ["New_password can't be empty"]
+    if params[:New_password].nil? || params[:New_password].empty? ||
+       params[:New_password].length < 6 || params[:Password]==params[:New_password]
+      @message += ["New_password is invalid or to short"]
     end
     if !@message.empty?
       json_return(@message)  
     else  
-      status = User.UpdatePassword(params[:Login],params[:Password],params[:New_password])
-      if status == 1 
-        @user = User.Get(params[:Login],params[:New_password])
-        json_return(@user)    
-      else 
-        @message = ["Somesing wrong(maybe login/password/new_password is invalid)"]    
-        json_return(@message)    
-      end 
+      if sign_in?
+        @user = User.find_by_Login(params[:Login])
+        if @user && @user.authenticate(params[:Password])
+          User.UpdatePassword(params[:Login],params[:New_password])
+          @user = User.Get(params[:Login]).first
+          json_return(@user)    
+        else
+          @message = ["Somesing wrong(maybe login/password/new_password is invalid)"]
+          json_return(@message)
+        end
+      else
+        @message = ["You dont have permisions. Please sign in"]
+        json_return(@message)
+      end
     end
   end
 
@@ -145,13 +191,19 @@ class UsersController < ApplicationController
     if !@message.empty?
       json_return(@message)
     else
-      status = User.Delete(params[:Login],params[:Password])
-      if status == 1
-        @user = ["Deleted"]
-        json_return(@user)
-      else 
-        @message = ["Somesing wrong(maybe login/password is invalid)"]
-        json_return(@message)
+      if sign_in?
+        @user = User.find_by_Login(params[:Login])
+        if @user && @user.authenticate(params[:Password])
+          User.Delete(params[:Login])
+          @user = ["Deleted"]
+          json_return(@user)
+        else 
+          @message = ["Somesing wrong(maybe login/password is invalid)"]
+          json_return(@message)
+        end
+      else
+        @message = ["You dont have permisions. Please sign in"]
+        json_return(@message)        
       end
     end
   end
