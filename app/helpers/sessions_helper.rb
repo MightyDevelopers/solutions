@@ -7,7 +7,7 @@ module SessionsHelper
     self.current_user = user
   end
 
-  def sign_in?
+  def signed_in?
     !current_user.nil?      
   end
 
@@ -18,6 +18,17 @@ module SessionsHelper
   def current_user
     remember_token = User.encrypt(cookies[:remember_token])      
     @current_user ||= User.find_by(remember_token: remember_token) 
+  end
+
+  def current_user?(user)
+    user == current_user
+  end
+
+  def signed_in_user
+    unless signed_in? 
+      masssege = ["Before sign in"]
+      render json: ma
+    end 
   end
 
   def sign_out

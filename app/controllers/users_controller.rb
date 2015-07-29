@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :signed_in_user, only: [:updateProfile, :changeLogin, :changePassword, :deleteUser]
+  before_action :correct_user, only: [:updateProfile, :changeLogin, :changePassword, :deleteUser]
+
   respond_to :json
 
   def createUser
@@ -96,20 +99,15 @@ class UsersController < ApplicationController
     if !@message.empty?
       json_return(@message)  
     else 
-      if sign_in?
-        @user = User.find_by_Login(params[:Login])
-        if @user
-          User.UpdateProfile(params[:Login],params[:Email],params[:FirstName],
-                      params[:LastName],params[:ProfileImgPath],params[:Facebook],
-                      params[:Age],params[:Sex],params[:IsPrivate])
-          @user = User.Get(params[:Login]).first
-          json_return(@user)  
-        else
-          @message =["Somesing wrong(maybe login is invalid)"]
-          json_return(@message)
-        end
+      @user = User.find_by_Login(params[:Login])
+      if @user
+        User.UpdateProfile(params[:Login],params[:Email],params[:FirstName],
+                    params[:LastName],params[:ProfileImgPath],params[:Facebook],
+                    params[:Age],params[:Sex],params[:IsPrivate])
+        @user = User.Get(params[:Login]).first
+        json_return(@user)  
       else
-        @message = ["You dont have permisions. Please sign in"]
+        @message =["Somesing wrong(maybe login is invalid)"]
         json_return(@message)
       end
     end
@@ -130,20 +128,15 @@ class UsersController < ApplicationController
     if !@message.empty?
       json_return(@message)  
     else      
-      if sign_in?
-        @user = User.find_by_Login(params[:Login])
-        if @user && @user.authenticate(params[:Password])
-          User.UpdateLogin(params[:Login],params[:New_login])
-          @user = User.Get(params[:New_login]).first
-          sign_in @user
-          json_return(@user)    
-        else 
-          @message = ["Somesing wrong(maybe login/password/new_login is invalid)"]    
-          json_return(@message)    
-        end
-      else
-        @message = ["You dont have permisions. Please sign in"]
-        json_return(@message)
+      @user = User.find_by_Login(params[:Login])
+      if @user && @user.authenticate(params[:Password])
+        User.UpdateLogin(params[:Login],params[:New_login])
+        @user = User.Get(params[:New_login]).first
+        sign_in @user
+        json_return(@user)    
+      else 
+        @message = ["Somesing wrong(maybe login/password/new_login is invalid)"]    
+        json_return(@message)    
       end
     end
   end
@@ -163,18 +156,13 @@ class UsersController < ApplicationController
     if !@message.empty?
       json_return(@message)  
     else  
-      if sign_in?
-        @user = User.find_by_Login(params[:Login])
-        if @user && @user.authenticate(params[:Password])
-          User.UpdatePassword(params[:Login],params[:New_password])
-          @user = User.Get(params[:Login]).first
-          json_return(@user)    
-        else
-          @message = ["Somesing wrong(maybe login/password/new_password is invalid)"]
-          json_return(@message)
-        end
+      @user = User.find_by_Login(params[:Login])
+      if @user && @user.authenticate(params[:Password])
+        User.UpdatePassword(params[:Login],params[:New_password])
+        @user = User.Get(params[:Login]).first
+        json_return(@user)    
       else
-        @message = ["You dont have permisions. Please sign in"]
+        @message = ["Somesing wrong(maybe login/password/new_password is invalid)"]
         json_return(@message)
       end
     end
@@ -191,19 +179,14 @@ class UsersController < ApplicationController
     if !@message.empty?
       json_return(@message)
     else
-      if sign_in?
-        @user = User.find_by_Login(params[:Login])
-        if @user && @user.authenticate(params[:Password])
-          User.Delete(params[:Login])
-          @user = ["Deleted"]
-          json_return(@user)
-        else 
-          @message = ["Somesing wrong(maybe login/password is invalid)"]
-          json_return(@message)
-        end
-      else
-        @message = ["You dont have permisions. Please sign in"]
-        json_return(@message)        
+      @user = User.find_by_Login(params[:Login])
+      if @user && @user.authenticate(params[:Password])
+        User.Delete(params[:Login])
+        @user = ["Deleted"]
+        json_return(@user)
+      else 
+        @message = ["Somesing wrong(maybe login/password is invalid)"]
+        json_return(@message)
       end
     end
   end
@@ -224,6 +207,13 @@ class UsersController < ApplicationController
         json_return(@user)  
       end
     end
+  end
+
+  private
+
+  def correct_user
+    @user = User.find_by_Login(params[:Login])
+    json_return(["Somesing wrong(Please sign in whith this params)"]) unless current_user?(@user)
   end
 
   def json_return(param)
