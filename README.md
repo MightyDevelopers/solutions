@@ -7,4 +7,4 @@
 5. After you mast create a database in your mysql server. Please use scripr from project folder/dbscripts/structure0
 6. Open file config/database.yml and set your params on username and password
 7. Open RoR and run command rake db:migrate
-8. 
+8. Now raun comand rails server or rails s and go to http://localhost:3000/.
