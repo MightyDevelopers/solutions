@@ -14,9 +14,15 @@ gem 'will_paginate', '3.0.4'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails', '4.1.0'
+gem 'coffee-script-source', '1.8.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'responders', '~> 2.0'
 gem 'email_verifier'
+
+
+group :windows do
+	gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+end
 
 group :development, :test do
   gem 'byebug'
