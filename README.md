@@ -3,6 +3,7 @@
 1. Clone server branch to you PC.
 2. Open RoR(Start Command prompt with Ruby) and go to project folder
 3. Run command "bundle install --without production"
+3.(optional) You might need to do "bundle update coffee-script-source" first due to some windows compatibility issues.
 4. If dont have install mysql server (https://drive.google.com/open?id=0B8mvULmUFGDjfndEMFMyRDdnaWpmX1VaakJOeExWSllZNFBmM0JGQVdTZmdwNDlEN01uRjg) 
 5. After you mast create a database in your mysql server. Please use scripr from project folder/dbscripts/structure0
 6. Open file config/database.yml and set your params on username and password
