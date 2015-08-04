@@ -26,8 +26,8 @@ module SessionsHelper
 
   def signed_in_user
     unless signed_in? 
-      masssege = ["Before sign in"]
-      render json: ma
+      massege = ["Before sign in"]
+      render json: { :errors => massege }, :status => "#{massege}"
     end 
   end
 

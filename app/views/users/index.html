@@ -18,43 +18,62 @@ Open console and use:
         $.ajax({
         method: "POST",
         url: "http://localhost:3000/users/createUser",
-        data: {Login: login, Password: password}
-        }).success(function (data){
+        data: {Login: login, Password: password}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        })   
     }
 
     var getUser = function(login,password){
         $.ajax({
         method: "POST",
         url: "http://localhost:3000/users/getUser",
-        data: {Login: login, Password: password}
-        }).success(function (data){
+        data: {Login: login, Password: password}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        }) 
     }
 
-    var updateProfile = function(login, email, firstName, lastName, profileImgPath,
-                                 facebook, age, sex, isPrivate){
+    var updateProfile = function(login, email, firstName, lastName, profileImgPath, facebook, age, sex, isPrivate){
         $.ajax({
         method: "POST",
         url: "http://localhost:3000/users/updateProfile",
         data: {Login: login, Email: email, FirstName: firstName, 
                LastName: lastName, ProfileImgPath: profileImgPath, Facebook: facebook, 
-               Age: age, Sex: sex, IsPrivate: isPrivate}
-        }).success(function (data){
+               Age: age, Sex: sex, IsPrivate: isPrivate}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        }) 
     }
 
     var changeLogin = function(login, password, new_login){
         $.ajax({
         method: "POST",
         url: "http://localhost:3000/users/changeLogin",
-        data: {Login: login, Password: password, New_login: new_login}
-        }).success(function (data){
+        data: {Login: login, Password: password, New_login: new_login}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        }) 
     }
 
 
@@ -62,40 +81,60 @@ Open console and use:
         $.ajax({
         method: "POST",
         url: "http://localhost:3000/users/changePassword",
-        data: {Login: login, Password: password, New_password: new_password}
-        }).success(function (data){
+        data: {Login: login, Password: password, New_password: new_password}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        }) 
     }
 
     var deleteUser = function(login, password){
         $.ajax({
         method: "POST",
         url: "http://localhost:3000/users/deleteUser",
-        data: {Login: login, Password: password}
-        }).success(function (data){
+        data: {Login: login, Password: password}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        }) 
     }   
 
     var searchByName = function(name){
         $.ajax({
         method: "POST",
         url: "http://localhost:3000/users/searchByName",
-        data: {Username: name}
-        }).success(function (data){
+        data: {Username: name}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        }) 
     }  
 
     var signOut = function(){
         $.ajax({
         method: "DELETE",
         url: "http://localhost:3000/sessions/destroy",
-        data: {}
-        }).success(function (data){
+        data: {}, 
+        success:function(data){
             console.log(data);
-        })
+        },
+        error:function(xhr){
+            var errors = $.parseJSON(xhr.responseText).errors
+            console.log(errors);
+        }
+        }) 
     } 
 
     //createUser();
