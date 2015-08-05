@@ -1,12 +1,11 @@
-DROP DATABASE IF EXISTS Solutions;
-CREATE DATABASE Solutions;
+CREATE DATABASE solutions;
 
-USE Solutions;
+USE solutions;
 
-CREATE TABLE Users 
+CREATE TABLE users 
 (
 	Login 			NVARCHAR(255) 	NOT NULL PRIMARY KEY,
-    password_digest	NVARCHAR(255) 	NOT NULL UNIQUE,
+    Password    	NVARCHAR(255) 	NOT NULL,
     Email 			NVARCHAR(255),
     FirstName 		NVARCHAR(35),
     LastName 		NVARCHAR(35),
