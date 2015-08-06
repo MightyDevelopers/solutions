@@ -1,16 +1,19 @@
 class User < ActiveRecord::Base
-  before_create :create_remember_token
+  before_create :createRememberToken
   validates :Login, presence: true,
                     uniqueness: true,
                     length: { minimum: 1 }
-  validates :password, length: { minimum: 6 }, 
-                       on: :create
+  validates :password, length: { minimum: 6 },
+                       on: :create         
+  validates :password, presence: { on: :update, allow_blank: true }
+  validates_email_realness_of :Email,
+                              allow_blank: true
   validates :Age, allow_blank: true,
                   numericality: { only_integer: true },
                   numericality: { greater_than: 1 }
   validates :Sex, allow_blank: true,
                   format: { with: /\A(F|M|N)\z/ }
-  has_secure_password 
+  has_secure_password
 
   scope :Get, lambda { |login| 
     select(:Login, :Email, :FirstName, :LastName, :ProfileImgPath, :Facebook, 
@@ -35,11 +38,11 @@ class User < ActiveRecord::Base
 
   scope :SearchUsersByName, lambda { |username|
     select(:Login, :Email, :FirstName, :LastName, :ProfileImgPath, 
-           :Facebook, :Age, :Sex, :IsPrivate).
-    where("FirstName LIKE ? OR LastName LIKE ? OR CONCAT (FirstName,' ', LastName) LIKE ? ",
+           :Facebook, :Age, :Sex).
+    where("IsPrivate = 'false' AND (FirstName LIKE ? OR LastName LIKE ? OR CONCAT (FirstName,' ', LastName) LIKE ?)",
       "%#{username}%","%#{username}%","%#{username}%") }
 
-  def User.new_remember_token
+  def User.newRememberToken
     SecureRandom.urlsafe_base64
   end
 
@@ -49,62 +52,8 @@ class User < ActiveRecord::Base
 
   private
 
-    def validates_params
-    # @message=[]
-    # if params[:Login].nil? || params[:Login].empty? 
-    #   @message += ["Login can't be empty"] 
-    # end
-    # if params[:Email].nil? || params[:Email].empty? 
-    #   params[:Email] = nil
-    # else 
-    #   begin
-    #     if EmailVerifier.check(params[:Email]) == false
-    #       @message += ["Email not valid"]
-    #     end
-    #   rescue Exception => e
-    #     @message += ["Email not valid"]
-    #   end
-    # end
-    # if params[:FirstName].nil? || params[:FirstName].empty? 
-    #   params[:FirstName] = nil
-    # end
-    # if params[:LastName].nil? || params[:LastName].empty? 
-    #   params[:LastName] = nil
-    # end
-    # if params[:ProfileImgPath].nil? || params[:ProfileImgPath].empty? 
-    #   params[:ProfileImgPath] = nil
-    # end
-    # if params[:Facebook].nil? || params[:Facebook].empty? 
-    #   params[:Facebook] = nil
-    # end
-    # if params[:Age].nil? || params[:Age].empty? 
-    #   params[:Age] = nil
-    # else 
-    #   params[:Age]=params[:Age].to_i
-    #   if params[:Age] <= 0
-    #     @message += ["Age mast be numeric or > 0"]
-    #   end
-    # end
-    # if params[:Sex].nil? || params[:Sex].empty? 
-    #   params[:Sex] = nil
-    # elsif params[:Sex].length>1 || params[:Sex]!= "M" ||
-    #       params[:Sex]!= "F" || params[:Sex]!= "N"
-    #   params[:Sex] = nil
-    # end
-    # if params[:IsPrivate].nil? || params[:IsPrivate].empty? 
-    #   params[:IsPrivate] = "\x00"
-    # elsif params[:IsPrivate] == "true"
-    #   params[:IsPrivate] = "\x01"
-    # elsif params[:IsPrivate] == "false" 
-    #   params[:IsPrivate] = "\x00"
-    # else params[:IsPrivate] = "\x00"
-    # end
-    
-    # return(@message)  
-    end
-
-    def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
+    def createRememberToken
+      self.remember_token = User.encrypt(User.newRememberToken)
     end
     
 end

@@ -190,6 +190,3 @@ DEPENDENCIES
   uglifier
   web-console (~> 2.0)
   will_paginate (= 3.0.4)
-
-BUNDLED WITH
-   1.10.5

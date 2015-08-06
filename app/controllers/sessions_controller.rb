@@ -1,13 +1,12 @@
 class SessionsController < ApplicationController
 
   def new
-      
   end
 
   def create
     user = User.find_by_Login(params[:Login])
     if user && user.authenticate(params[:Password])
-        sign_in user
+        createSession user
         render json: user
     else
         render json: ["Invalid email/password combination"]
@@ -15,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
+    destroySession
     render json: ["End of session"]
   end
 

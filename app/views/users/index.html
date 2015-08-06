@@ -129,10 +129,6 @@ Open console and use:
         data: {}, 
         success:function(data){
             console.log(data);
-        },
-        error:function(xhr){
-            var errors = $.parseJSON(xhr.responseText).errors
-            console.log(errors);
         }
         }) 
     } 

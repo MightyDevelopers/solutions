@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728115154) do
+ActiveRecord::Schema.define(version: 20150806202931) do
 
   create_table "users", primary_key: "Login", force: :cascade do |t|
-    t.string  "password_digest", limit: 255,                  null: false
+    t.string  "password_digest", limit: 255,                 null: false
     t.string  "Email",           limit: 255
     t.string  "FirstName",       limit: 35
     t.string  "LastName",        limit: 35
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20150728115154) do
     t.string  "Facebook",        limit: 255
     t.integer "Age",             limit: 4
     t.string  "Sex",             limit: 1
-    t.binary  "IsPrivate",       limit: 1,   default: "b'1'"
     t.string  "remember_token",  limit: 255
+    t.boolean "IsPrivate",                   default: false
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree

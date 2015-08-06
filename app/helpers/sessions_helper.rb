@@ -1,41 +1,41 @@
 module SessionsHelper
 
-  def sign_in(user)
-    remember_token = User.new_remember_token
+  def createSession(user)
+    remember_token = User.newRememberToken
     cookies.permanent[:remember_token] = remember_token
     user.update_attribute(:remember_token, User.encrypt(remember_token))
-    self.current_user = user
+    self.currentUser = user
   end
 
-  def signed_in?
-    !current_user.nil?      
+  def signedIn?
+    !currentUser.nil?      
   end
 
-  def current_user=(user)
-      @current_user = user
+  def currentUser=(user)
+      @currentUser = user
   end
 
-  def current_user
+  def currentUser
     remember_token = User.encrypt(cookies[:remember_token])      
-    @current_user ||= User.find_by(remember_token: remember_token) 
+    @currentUser ||= User.find_by(remember_token: remember_token) 
   end
 
-  def current_user?(user)
-    user == current_user
+  def currentUser?(user)
+    user == currentUser
   end
 
-  def signed_in_user
-    unless signed_in? 
+  def isAuthorize?
+    unless signedIn? 
       massege = ["Before sign in"]
       render json: { :errors => massege }, :status => "#{massege}"
     end 
   end
 
-  def sign_out
-    current_user.update_attribute(:remember_token,
-                                  User.encrypt(User.new_remember_token))
+  def destroySession
+    currentUser.update_attribute(:remember_token,
+                                  User.encrypt(User.newRememberToken))
     cookies.delete(:remember_token)
-    self.current_user = nil
+    self.currentUser = nil
   end
 
 end
