@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SolutionsAI.DatabaseTools;
 
 namespace SolutionsAI
 {
@@ -36,7 +33,13 @@ namespace SolutionsAI
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddOptions();
+
+            services.Configure<ConnectionOptions>(Configuration);
+
             services.AddMvc();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -52,6 +55,13 @@ namespace SolutionsAI
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
+
+            app.UseCors(builder =>
+            {
+                builder
+                    .WithMethods("GET", "POST", "PUT", "DELETE")
+                    .AllowAnyOrigin();
+            });
 
             app.UseMvc();
         }
