@@ -13,7 +13,6 @@
     }
   },
   "dependencies": {
-    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
-    "MySql.Data": "6.9.8"
+    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final"
   }
 }

@@ -120,8 +120,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
-          "MySql.Data": "6.9.8"
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final"
         },
         "frameworkAssemblies": [
           "System.Data"
@@ -131,7 +130,6 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "MySql.Data": "6.9.8",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -261,8 +259,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
-          "MySql.Data": "6.9.8"
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final"
         },
         "frameworkAssemblies": [
           "System.Data"
@@ -272,7 +269,6 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "MySql.Data": "6.9.8",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -402,8 +398,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
-          "MySql.Data": "6.9.8"
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final"
         },
         "frameworkAssemblies": [
           "System.Data"
@@ -413,7 +408,6 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "MySql.Data": "6.9.8",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [

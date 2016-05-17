@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SolutionsAI.Data.Repositories;
 using SolutionsAI.DataInterface;
 
 namespace SolutionsAI.Data

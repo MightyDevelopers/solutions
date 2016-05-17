@@ -3,45 +3,18 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "MySql.Data/6.9.8": {
-        "type": "package",
-        "compile": {
-          "lib/net45/MySql.Data.dll": {}
-        },
-        "runtime": {
-          "lib/net45/MySql.Data.dll": {}
-        }
-      },
       "SolutionsAI.Domain/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1"
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
-      "MySql.Data/6.9.8": {
-        "type": "package",
-        "compile": {
-          "lib/net45/MySql.Data.dll": {}
-        },
-        "runtime": {
-          "lib/net45/MySql.Data.dll": {}
-        }
-      },
       "SolutionsAI.Domain/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1"
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
-      "MySql.Data/6.9.8": {
-        "type": "package",
-        "compile": {
-          "lib/net45/MySql.Data.dll": {}
-        },
-        "runtime": {
-          "lib/net45/MySql.Data.dll": {}
-        }
-      },
       "SolutionsAI.Domain/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1"
@@ -52,28 +25,10 @@
     "SolutionsAI.Domain/1.0.0": {
       "type": "project",
       "path": "../SolutionsAI.Domain/project.json"
-    },
-    "MySql.Data/6.9.8": {
-      "type": "package",
-      "sha512": "ZSkMKsB1J9Cb/nO3+GlfX/YttibU23y5ZQtn/xzzl3xfPK512wP1jNjiVG4AFvmeJrf02qHNc/GfXJGYYHN8Pg==",
-      "files": [
-        "CHANGES",
-        "content/app.config.transform",
-        "content/web.config.transform",
-        "lib/net20/MySql.Data.dll",
-        "lib/net20-cf/MySql.Data.CF.dll",
-        "lib/net40/MySql.Data.dll",
-        "lib/net45/MySql.Data.dll",
-        "MySql.Data.6.9.8.nupkg",
-        "MySql.Data.6.9.8.nupkg.sha512",
-        "MySql.Data.nuspec",
-        "Readme.txt"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "MySql.Data >= 6.9.8",
       "SolutionsAI.Domain >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": [

@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using Microsoft.Extensions.OptionsModel;
 using MySql.Data.MySqlClient;
-using SolutionsAI.Data.DataRetrievers;
 using SolutionsAI.DatabaseTools;
-using SolutionsAI.DatabaseTools.Extensions;
 using SolutionsAI.DataInterface;
 
-namespace SolutionsAI.Data
+namespace SolutionsAI.Data.Repositories
 {
-    public class ProfileRepository: BaseRepository<Profile>, IProfileRepository
+    public class ProfileRepository: BaseMySqlRepository<Profile>, IProfileRepository
     {
         public ProfileRepository(IOptions<ConnectionOptions> connectionOptions, IDataRetriever<Profile> dataRetriever)
             : base(connectionOptions, dataRetriever)
@@ -18,7 +15,7 @@ namespace SolutionsAI.Data
 
         public Profile GetUserProfile(string email)
         {
-            var command = CommandExtensions.GetStoredProcedureCommand(
+            var command = GetStoredProcedureCommand(
                 "GetUserByEmail",
                 new MySqlParameter("email", email));
             return GetItem(command);
@@ -26,7 +23,7 @@ namespace SolutionsAI.Data
 
         public IEnumerable<Profile> GetAllUsers()
         {
-            var command = CommandExtensions.GetStoredProcedureCommand("GetAllUsers");
+            var command = GetStoredProcedureCommand("GetAllUsers");
             return GetItems(command);
         }
     }

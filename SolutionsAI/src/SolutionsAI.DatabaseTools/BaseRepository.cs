@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.Extensions.OptionsModel;
-using MySql.Data.MySqlClient;
 
 namespace SolutionsAI.DatabaseTools
 {
@@ -29,11 +28,9 @@ namespace SolutionsAI.DatabaseTools
 
         protected TResult ExecuteUsingConnection<TResult>(Func<IDataReader, TResult> retrieve, IDbCommand command)
         {
-            var builder = new MySqlConnectionStringBuilder(_options.ConnectionString);
             using (
                 var connection =
-                    new MySqlConnection(
-                        builder.GetConnectionString(true)))
+                    GetConnection(_options.ConnectionString))
             {
                 connection.Open();
                 command.Connection = connection;
@@ -44,5 +41,21 @@ namespace SolutionsAI.DatabaseTools
                 }
             }
         }
+
+        protected virtual IDbCommand GetStoredProcedureCommand(string text, params IDbDataParameter[] parameters)
+        {
+            var command = GetStoredProcedureCommand();
+            command.CommandText = text;
+            command.CommandType = CommandType.StoredProcedure;
+            foreach (var dbDataParameter in parameters)
+            {
+                command.Parameters.Add(dbDataParameter);
+            }
+            return command;
+        }
+
+        protected abstract IDbConnection GetConnection(string connectionstring);
+
+        protected abstract IDbCommand GetStoredProcedureCommand();
     }
 }
