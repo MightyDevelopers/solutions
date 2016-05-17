@@ -1,27 +1,25 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.OptionsModel;
 using SolutionsAI.Data;
-using SolutionsAI.DatabaseTools;
+using SolutionsAI.DataInterface;
 
 namespace SolutionsAI.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class ProfilesController : Controller
     {
-        private ConnectionOptions ConnectionOptions { get; set; }
+        private IProfileRepository ProfileRepository { get; set; }
 
-        public UsersController(IOptions<ConnectionOptions> options)
+        public ProfilesController(IProfileRepository profileRepository)
         {
-            ConnectionOptions = options.Value;
+            ProfileRepository = profileRepository;
         }
 
         // GET: api/values
         [HttpGet]
         public IEnumerable<Profile> Get()
         {
-            var repo = new UserRepository(ConnectionOptions);
-            return repo.GetAllUsers();
+            return ProfileRepository.GetAllUsers();
         }
 
         //// GET api/values/5
@@ -34,7 +32,7 @@ namespace SolutionsAI.Controllers
         [HttpGet("{email}")]
         public Profile Get(string email)
         {
-            return new UserRepository(ConnectionOptions).GetUserProfile(email);
+            return ProfileRepository.GetUserProfile(email);
         }
 
         // POST api/values

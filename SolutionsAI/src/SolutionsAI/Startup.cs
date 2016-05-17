@@ -3,6 +3,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SolutionsAI.Data;
 using SolutionsAI.DatabaseTools;
 
 namespace SolutionsAI
@@ -40,6 +41,10 @@ namespace SolutionsAI
             services.AddMvc();
 
             services.AddCors();
+            
+            services.AddMySqlDataRetriverRegistrations();
+
+            services.AddMySqlRepositoryRegistrations();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Microsoft.Extensions.OptionsModel;
 using MySql.Data.MySqlClient;
 
 namespace SolutionsAI.DatabaseTools
@@ -8,15 +9,23 @@ namespace SolutionsAI.DatabaseTools
     public abstract class BaseRepository<TEntity>
     {
         private readonly ConnectionOptions _options;
+        private readonly IDataRetriever<TEntity> _dataRetriever;
 
-        protected BaseRepository(ConnectionOptions options)
+        protected BaseRepository(IOptions<ConnectionOptions> options, IDataRetriever<TEntity> dataRetriever)
         {
-            _options = options;
+            _options = options.Value;
+            _dataRetriever = dataRetriever;
         }
 
-        protected abstract TEntity GetItem(IDbCommand command);
+        protected virtual TEntity GetItem(IDbCommand command)
+        {
+            return ExecuteUsingConnection(reader => _dataRetriever.GetValue(reader, true), command);
+        }
 
-        protected abstract IEnumerable<TEntity> GetItems(IDbCommand command);
+        protected virtual IEnumerable<TEntity> GetItems(IDbCommand command)
+        {
+            return ExecuteUsingConnection(_dataRetriever.GetValues, command);
+        }
 
         protected TResult ExecuteUsingConnection<TResult>(Func<IDataReader, TResult> retrieve, IDbCommand command)
         {

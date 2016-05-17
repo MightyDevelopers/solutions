@@ -13,6 +13,7 @@
     }
   },
   "dependencies": {
-    "MySql.Data": "6.9.8"
+    "MySql.Data": "6.9.8",
+    "SolutionsAI.Domain": "1.0.0-*"
   }
 }

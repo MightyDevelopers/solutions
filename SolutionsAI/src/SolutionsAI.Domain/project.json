@@ -1,0 +1,12 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "SolutionsAI.Domain Class Library",
+  "authors": [ "Volodymyr" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnx451": { },
+  }
+}
