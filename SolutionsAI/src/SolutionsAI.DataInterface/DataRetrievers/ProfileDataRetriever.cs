@@ -3,7 +3,7 @@ using System.Data;
 using SolutionsAI.DatabaseTools;
 using SolutionsAI.Domain;
 
-namespace SolutionsAI.BusinessLogic.DataRetrievers
+namespace SolutionsAI.DataInterface.DataRetrievers
 {
     public class ProfileDataRetriever: BaseDataRetriever<Profile>
     {
