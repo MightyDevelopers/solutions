@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SolutionsAI.BusinessLogic;
 using SolutionsAI.DatabaseTools;
+using SolutionsAI.DataInterface.DataRetrievers;
 
 namespace SolutionsAI
 {
@@ -42,8 +43,6 @@ namespace SolutionsAI
 
             services.AddCors();
             
-            services.AddMySqlDataRetriverRegistrations();
-
             services.AddRepositoryRegistrations();
         }
 

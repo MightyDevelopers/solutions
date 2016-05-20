@@ -5,8 +5,7 @@ namespace SolutionsAI.DatabaseTools
 {
     public interface IDataRetriever<out TEntity>
     {
-        TEntity GetValue(IDataReader dataReader);
-        TEntity GetValue(IDataReader dataReader, bool needRead);
+        TEntity GetValue(IDataReader dataReader, bool needRead, bool needPopulateOrdinals = true);
         IEnumerable<TEntity> GetValues(IDataReader dataReader);
     }
 }
