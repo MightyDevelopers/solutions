@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
-using SolutionsAI.Data;
-using SolutionsAI.DataInterface;
+using SolutionsAI.BusinessLogic.Services.Interface;
+using SolutionsAI.Domain;
 
 namespace SolutionsAI.Controllers
 {
     [Route("api/[controller]")]
     public class ProfilesController : Controller
     {
-        private IProfileRepository ProfileRepository { get; set; }
+        private IProfileService ProfileRepository { get; set; }
 
-        public ProfilesController(IProfileRepository profileRepository)
+        public ProfilesController(IProfileService profileRepository)
         {
             ProfileRepository = profileRepository;
         }
@@ -19,7 +19,7 @@ namespace SolutionsAI.Controllers
         [HttpGet]
         public IEnumerable<Profile> Get()
         {
-            return ProfileRepository.GetAllUsers();
+            return ProfileRepository.GetAllUsers().Result;
         }
 
         //// GET api/values/5
@@ -32,7 +32,7 @@ namespace SolutionsAI.Controllers
         [HttpGet("{email}")]
         public Profile Get(string email)
         {
-            return ProfileRepository.GetUserProfile(email);
+            return ProfileRepository.GetUserProfile(email).Result;
         }
 
         // POST api/values

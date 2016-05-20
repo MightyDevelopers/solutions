@@ -3,7 +3,7 @@ using Microsoft.Extensions.OptionsModel;
 using MySql.Data.MySqlClient;
 using SolutionsAI.DatabaseTools;
 
-namespace SolutionsAI.Data.Repositories
+namespace SolutionsAI.Data.MySql
 {
     public class BaseMySqlRepository<TEntity>: BaseRepository<TEntity>
     {
@@ -13,8 +13,12 @@ namespace SolutionsAI.Data.Repositories
 
         protected override IDbConnection GetConnection(string connectionstring)
         {
-            var builder = new MySqlConnectionStringBuilder();
-            return new MySqlConnection(builder.GetConnectionString(true));
+            return new MySqlConnection(connectionstring);
+        }
+
+        public override IDbDataParameter GetDataParameter(string name, object value)
+        {
+            return new MySqlParameter(name, value);
         }
 
         protected override IDbCommand GetStoredProcedureCommand()

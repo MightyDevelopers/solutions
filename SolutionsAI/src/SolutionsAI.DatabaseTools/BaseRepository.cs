@@ -5,7 +5,7 @@ using Microsoft.Extensions.OptionsModel;
 
 namespace SolutionsAI.DatabaseTools
 {
-    public abstract class BaseRepository<TEntity>
+    public abstract class BaseRepository<TEntity>: IRepository<TEntity>
     {
         private readonly ConnectionOptions _options;
         private readonly IDataRetriever<TEntity> _dataRetriever;
@@ -16,17 +16,17 @@ namespace SolutionsAI.DatabaseTools
             _dataRetriever = dataRetriever;
         }
 
-        protected virtual TEntity GetItem(IDbCommand command)
+        public virtual TEntity GetItem(string commandText, params IDbDataParameter[] parameters)
         {
-            return ExecuteUsingConnection(reader => _dataRetriever.GetValue(reader, true), command);
+            return ExecuteUsingConnection(reader => _dataRetriever.GetValue(reader, true), GetStoredProcedureCommand(commandText, parameters));
         }
 
-        protected virtual IEnumerable<TEntity> GetItems(IDbCommand command)
+        public virtual IEnumerable<TEntity> GetItems(string commandText, params IDbDataParameter[] parameters)
         {
-            return ExecuteUsingConnection(_dataRetriever.GetValues, command);
+            return ExecuteUsingConnection(_dataRetriever.GetValues, GetStoredProcedureCommand(commandText, parameters));
         }
 
-        protected TResult ExecuteUsingConnection<TResult>(Func<IDataReader, TResult> retrieve, IDbCommand command)
+        private TResult ExecuteUsingConnection<TResult>(Func<IDataReader, TResult> retrieve, IDbCommand command)
         {
             using (
                 var connection =
@@ -57,5 +57,7 @@ namespace SolutionsAI.DatabaseTools
         protected abstract IDbConnection GetConnection(string connectionstring);
 
         protected abstract IDbCommand GetStoredProcedureCommand();
+
+        public abstract IDbDataParameter GetDataParameter(string name, object value);
     }
 }

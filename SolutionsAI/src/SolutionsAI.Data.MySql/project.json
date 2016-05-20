@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+  "description": "SolutionsAI.Data.MySql Class Library",
+  "authors": [ "Volodymyr" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": { }
+  },
+  "dependencies": {
+    "MySql.Data": "6.9.8",
+    "SolutionsAI.DatabaseTools": "1.0.0-*"
+  }
+}

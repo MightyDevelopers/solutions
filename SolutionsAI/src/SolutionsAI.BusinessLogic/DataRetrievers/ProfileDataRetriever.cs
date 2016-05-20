@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data;
 using SolutionsAI.DatabaseTools;
+using SolutionsAI.Domain;
 
-namespace SolutionsAI.Data.DataRetrievers
+namespace SolutionsAI.BusinessLogic.DataRetrievers
 {
     public class ProfileDataRetriever: BaseDataRetriever<Profile>
     {

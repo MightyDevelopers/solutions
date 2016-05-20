@@ -3,19 +3,45 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "Data/1.0.0": {
-        "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+      "Data/1.1.0": {
+        "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
-          "MySql.Data": "6.9.8",
-          "SolutionsAI.DatabaseTools": "1.0.0",
-          "SolutionsAI.DataInterface": "1.0.0"
+          "EnterpriseLibrary.Common": "6.0.1304",
+          "EnterpriseLibrary.Data": "6.0.1304"
+        },
+        "compile": {
+          "lib/Data.dll": {}
+        },
+        "runtime": {
+          "lib/Data.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Common/6.0.1304": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Data/6.0.1304": {
+        "type": "package",
+        "dependencies": {
+          "EnterpriseLibrary.Common": "6.0.0"
         },
         "frameworkAssemblies": [
-          "System.Data"
-        ]
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        }
       },
       "Microsoft.ApplicationInsights/1.1.1-beta": {
         "type": "package",
@@ -1427,6 +1453,28 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "SolutionsAI.BusinessLogic/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "SolutionsAI.Data.MySql": "1.0.0",
+          "SolutionsAI.DataInterface": "1.0.0",
+          "SolutionsAI.Domain": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Data"
+        ]
+      },
+      "SolutionsAI.Data.MySql/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "MySql.Data": "6.9.8",
+          "SolutionsAI.DatabaseTools": "1.0.0"
+        }
+      },
       "SolutionsAI.DatabaseTools/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -1441,6 +1489,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -1664,19 +1713,45 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
-      "Data/1.0.0": {
-        "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+      "Data/1.1.0": {
+        "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
-          "MySql.Data": "6.9.8",
-          "SolutionsAI.DatabaseTools": "1.0.0",
-          "SolutionsAI.DataInterface": "1.0.0"
+          "EnterpriseLibrary.Common": "6.0.1304",
+          "EnterpriseLibrary.Data": "6.0.1304"
+        },
+        "compile": {
+          "lib/Data.dll": {}
+        },
+        "runtime": {
+          "lib/Data.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Common/6.0.1304": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Data/6.0.1304": {
+        "type": "package",
+        "dependencies": {
+          "EnterpriseLibrary.Common": "6.0.0"
         },
         "frameworkAssemblies": [
-          "System.Data"
-        ]
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        }
       },
       "Microsoft.ApplicationInsights/1.1.1-beta": {
         "type": "package",
@@ -3091,6 +3166,28 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "SolutionsAI.BusinessLogic/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "SolutionsAI.Data.MySql": "1.0.0",
+          "SolutionsAI.DataInterface": "1.0.0",
+          "SolutionsAI.Domain": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Data"
+        ]
+      },
+      "SolutionsAI.Data.MySql/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "MySql.Data": "6.9.8",
+          "SolutionsAI.DatabaseTools": "1.0.0"
+        }
+      },
       "SolutionsAI.DatabaseTools/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -3105,6 +3202,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -3328,19 +3426,45 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
-      "Data/1.0.0": {
-        "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+      "Data/1.1.0": {
+        "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
-          "MySql.Data": "6.9.8",
-          "SolutionsAI.DatabaseTools": "1.0.0",
-          "SolutionsAI.DataInterface": "1.0.0"
+          "EnterpriseLibrary.Common": "6.0.1304",
+          "EnterpriseLibrary.Data": "6.0.1304"
+        },
+        "compile": {
+          "lib/Data.dll": {}
+        },
+        "runtime": {
+          "lib/Data.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Common/6.0.1304": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Data/6.0.1304": {
+        "type": "package",
+        "dependencies": {
+          "EnterpriseLibrary.Common": "6.0.0"
         },
         "frameworkAssemblies": [
-          "System.Data"
-        ]
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        },
+        "runtime": {
+          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
+        }
       },
       "Microsoft.ApplicationInsights/1.1.1-beta": {
         "type": "package",
@@ -4755,6 +4879,28 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
+      "SolutionsAI.BusinessLogic/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "SolutionsAI.Data.MySql": "1.0.0",
+          "SolutionsAI.DataInterface": "1.0.0",
+          "SolutionsAI.Domain": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Data"
+        ]
+      },
+      "SolutionsAI.Data.MySql/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "MySql.Data": "6.9.8",
+          "SolutionsAI.DatabaseTools": "1.0.0"
+        }
+      },
       "SolutionsAI.DatabaseTools/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -4769,6 +4915,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -4993,9 +5140,13 @@
     }
   },
   "libraries": {
-    "Data/1.0.0": {
+    "SolutionsAI.BusinessLogic/1.0.0": {
       "type": "project",
-      "path": "../Data/project.json"
+      "path": "../SolutionsAI.BusinessLogic/project.json"
+    },
+    "SolutionsAI.Data.MySql/1.0.0": {
+      "type": "project",
+      "path": "../SolutionsAI.Data.MySql/project.json"
     },
     "SolutionsAI.DatabaseTools/1.0.0": {
       "type": "project",
@@ -5008,6 +5159,46 @@
     "SolutionsAI.Domain/1.0.0": {
       "type": "project",
       "path": "../SolutionsAI.Domain/project.json"
+    },
+    "Data/1.1.0": {
+      "type": "package",
+      "sha512": "ZaXJgLF6CYIMBH5+WwSpTG2yJckb1fJHHIsC+lMjEgSWgUEu4PHaq2VYw2YZle8rf1KI8PGPuS9hM6GiA0/YXw==",
+      "files": [
+        "content/_._",
+        "Data.1.1.0.nupkg",
+        "Data.1.1.0.nupkg.sha512",
+        "Data.nuspec",
+        "lib/Data.dll"
+      ]
+    },
+    "EnterpriseLibrary.Common/6.0.1304": {
+      "type": "package",
+      "sha512": "w/ua1PWAQD1/CnJ+qz/5APgmqI/1YnbamnwFGSotm7b66sFIkrnfLC+9+WzcSZWnePwwUw3Pl2QsLVDyX7NwaQ==",
+      "files": [
+        "EnterpriseLibrary.Common.6.0.1304.nupkg",
+        "EnterpriseLibrary.Common.6.0.1304.nupkg.sha512",
+        "EnterpriseLibrary.Common.nuspec",
+        "EnterpriseLibrary.Configuration.xsd",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.xml",
+        "tools/install.ps1",
+        "tools/Utils.psm1",
+        "Update-EntlibConfiguration.ps1"
+      ]
+    },
+    "EnterpriseLibrary.Data/6.0.1304": {
+      "type": "package",
+      "sha512": "FmaIrwbO7qOg0hd6rESeltyxcOccBa9V5QXPQ/4vMzpqZXh457uiJcwV4Xtx8q1zFhiGq1AszYjWP1p69Qps+w==",
+      "files": [
+        "EnterpriseLibrary.Data.6.0.1304.nupkg",
+        "EnterpriseLibrary.Data.6.0.1304.nupkg.sha512",
+        "EnterpriseLibrary.Data.nuspec",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll",
+        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.xml",
+        "Readme.txt",
+        "tools/install.ps1",
+        "tools/Utils.psm1"
+      ]
     },
     "Microsoft.ApplicationInsights/1.1.1-beta": {
       "type": "package",
@@ -6927,7 +7118,8 @@
       "Microsoft.Extensions.Configuration.Json >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Console >= 1.0.0-rc1-final",
-      "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final"
+      "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
+      "SolutionsAI.BusinessLogic >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": []
   }

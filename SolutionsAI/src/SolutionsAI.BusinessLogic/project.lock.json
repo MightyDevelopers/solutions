@@ -116,6 +116,14 @@
           "lib/net45/MySql.Data.dll": {}
         }
       },
+      "SolutionsAI.Data.MySql/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "MySql.Data": "6.9.8",
+          "SolutionsAI.DatabaseTools": "1.0.0"
+        }
+      },
       "SolutionsAI.DatabaseTools/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -130,6 +138,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -255,6 +264,14 @@
           "lib/net45/MySql.Data.dll": {}
         }
       },
+      "SolutionsAI.Data.MySql/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "MySql.Data": "6.9.8",
+          "SolutionsAI.DatabaseTools": "1.0.0"
+        }
+      },
       "SolutionsAI.DatabaseTools/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -269,6 +286,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -394,6 +412,14 @@
           "lib/net45/MySql.Data.dll": {}
         }
       },
+      "SolutionsAI.Data.MySql/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1",
+        "dependencies": {
+          "MySql.Data": "6.9.8",
+          "SolutionsAI.DatabaseTools": "1.0.0"
+        }
+      },
       "SolutionsAI.DatabaseTools/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -408,6 +434,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
         "frameworkAssemblies": [
@@ -421,6 +448,10 @@
     }
   },
   "libraries": {
+    "SolutionsAI.Data.MySql/1.0.0": {
+      "type": "project",
+      "path": "../SolutionsAI.Data.MySql/project.json"
+    },
     "SolutionsAI.DatabaseTools/1.0.0": {
       "type": "project",
       "path": "../SolutionsAI.DatabaseTools/project.json"
@@ -551,9 +582,9 @@
     "": [
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.0.0-rc1-final",
       "Microsoft.Extensions.OptionsModel >= 1.0.0-rc1-final",
-      "MySql.Data >= 6.9.8",
-      "SolutionsAI.DatabaseTools >= 1.0.0-*",
-      "SolutionsAI.DataInterface >= 1.0.0-*"
+      "SolutionsAI.Data.MySql >= 1.0.0-*",
+      "SolutionsAI.DataInterface >= 1.0.0-*",
+      "SolutionsAI.Domain >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": [
       "fx/System.Data >= 4.0.0"

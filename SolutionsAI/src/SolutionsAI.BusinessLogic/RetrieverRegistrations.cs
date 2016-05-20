@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SolutionsAI.Data.DataRetrievers;
+using SolutionsAI.BusinessLogic.DataRetrievers;
 using SolutionsAI.DatabaseTools;
+using SolutionsAI.Domain;
 
-namespace SolutionsAI.Data
+namespace SolutionsAI.BusinessLogic
 {
-    public static class MySqlRetrieverRegistrations
+    public static class RetrieverRegistrations
     {
         public static void AddMySqlDataRetriverRegistrations(this IServiceCollection services)
         {

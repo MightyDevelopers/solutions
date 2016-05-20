@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SolutionsAI.Data
+namespace SolutionsAI.Domain
 {
     public class User
     {
