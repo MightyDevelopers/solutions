@@ -5,16 +5,18 @@ namespace SolutionsAI.DatabaseTools
 {
     public abstract class BaseDataRetriever<T>: IDataRetriever<T>
     {
-        public virtual T GetValue(IDataReader dataReader, bool needRead, bool needPopulateOrdinals = true)
+        public virtual T GetValue(IDataReader dataReader, bool useOrdinals = true)
         {
-            if (needPopulateOrdinals)
+            if (useOrdinals)
                 PopulateOrdinals(dataReader);
-            if (needRead)
-                dataReader.Read();
-            return GetValue(dataReader);
+            dataReader.Read();
+            return useOrdinals 
+                ? GetValueUsingOrdinals(dataReader) 
+                : GetValueUsingIndexer(dataReader);
         }
 
-        protected abstract T GetValue(IDataReader dataReader);
+        protected abstract T GetValueUsingOrdinals(IDataReader dataReader);
+        protected abstract T GetValueUsingIndexer(IDataReader dataReader);
 
         public IEnumerable<T> GetValues(IDataReader dataReader)
         {
@@ -22,7 +24,7 @@ namespace SolutionsAI.DatabaseTools
             var result = new List<T>();
             while (dataReader.Read())
             {
-                result.Add(GetValue(dataReader, false, false));
+                result.Add(GetValueUsingOrdinals(dataReader));
             }
             return result;
         }

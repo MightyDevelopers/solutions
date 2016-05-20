@@ -13,7 +13,7 @@ namespace SolutionsAI.DataInterface.DataRetrievers
         private int LastUpdateDateOrdinal { get; set; }
         private int RegistrationDateOrdinal { get; set; }
 
-        protected override Profile GetValue(IDataReader dataReader)
+        protected override Profile GetValueUsingOrdinals(IDataReader dataReader)
         {
             return new Profile
             {
@@ -22,6 +22,18 @@ namespace SolutionsAI.DataInterface.DataRetrievers
                 LastName = dataReader.GetString(LastNameOrdinal),
                 LastUpdateDate = dataReader.GetUtcDateTime(LastUpdateDateOrdinal),
                 RegistrationDate = dataReader.GetUtcDateTime(RegistrationDateOrdinal)
+            };
+        }
+
+        protected override Profile GetValueUsingIndexer(IDataReader dataReader)
+        {
+            return new Profile
+            {
+                EMail = dataReader["Email"].ToString(),
+                FirstName = dataReader["FirstName"].ToString(),
+                LastName = dataReader["LastName"].ToString(),
+                LastUpdateDate = dataReader.GetUtcDateTime("LastUpdateDate"),
+                RegistrationDate = dataReader.GetUtcDateTime("RegistrationDate")
             };
         }
 

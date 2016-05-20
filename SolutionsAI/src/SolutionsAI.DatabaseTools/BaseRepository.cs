@@ -18,7 +18,7 @@ namespace SolutionsAI.DatabaseTools
 
         public virtual TEntity GetItem(string commandText, params IDbDataParameter[] parameters)
         {
-            return ExecuteUsingConnection(reader => _dataRetriever.GetValue(reader, true), GetStoredProcedureCommand(commandText, parameters));
+            return ExecuteUsingConnection(reader => _dataRetriever.GetValue(reader), GetStoredProcedureCommand(commandText, parameters));
         }
 
         public virtual IEnumerable<TEntity> GetItems(string commandText, params IDbDataParameter[] parameters)

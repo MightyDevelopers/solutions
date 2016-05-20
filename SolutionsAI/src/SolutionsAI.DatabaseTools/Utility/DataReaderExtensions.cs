@@ -10,5 +10,11 @@ namespace SolutionsAI.DatabaseTools.Utility
             var value = dataReader.GetDateTime(dateTimeOrdinal);
             return DateTime.SpecifyKind(value, DateTimeKind.Utc);
         }
+
+        public static DateTime GetUtcDateTime(this IDataReader dataReader, string dateTimeColumnName)
+        {
+            var value = (DateTime)dataReader[dateTimeColumnName];
+            return DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
     }
 }
