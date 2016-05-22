@@ -26,6 +26,11 @@ namespace SolutionsAI.DatabaseTools
             return ExecuteUsingConnection(_dataRetriever.GetValues, GetStoredProcedureCommand(commandText, parameters));
         }
 
+        public bool HasResult(string commandText, params IDbDataParameter[] parameters)
+        {
+            return ExecuteUsingConnection(reader => reader.Read(), GetStoredProcedureCommand(commandText, parameters));
+        }
+
         private TResult ExecuteUsingConnection<TResult>(Func<IDataReader, TResult> retrieve, IDbCommand command)
         {
             using (

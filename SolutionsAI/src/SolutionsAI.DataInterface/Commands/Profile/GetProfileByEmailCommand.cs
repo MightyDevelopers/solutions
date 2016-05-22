@@ -4,12 +4,12 @@ using SolutionsAI.DataInterface.Commands.Base;
 
 namespace SolutionsAI.DataInterface.Commands.Profile
 {
-    public class GetProfileByEmail: BaseCommand<Domain.Profile, Domain.Profile>
+    public class GetProfileByEmailCommand: BaseCommand<Domain.Profile, Domain.Profile>
     {
         protected override string Name => "GetProfileByEmail";
         private string _email = string.Empty;
 
-        public GetProfileByEmail(IRepository<Domain.Profile> repository) : base(repository)
+        public GetProfileByEmailCommand(IRepository<Domain.Profile> repository) : base(repository)
         {
         }
 

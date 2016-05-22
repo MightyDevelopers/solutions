@@ -3,47 +3,7 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "Data/1.1.0": {
-        "type": "package",
-        "dependencies": {
-          "EnterpriseLibrary.Common": "6.0.1304",
-          "EnterpriseLibrary.Data": "6.0.1304"
-        },
-        "compile": {
-          "lib/Data.dll": {}
-        },
-        "runtime": {
-          "lib/Data.dll": {}
-        }
-      },
-      "EnterpriseLibrary.Common/6.0.1304": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
-        "compile": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
-        },
-        "runtime": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
-        }
-      },
-      "EnterpriseLibrary.Data/6.0.1304": {
-        "type": "package",
-        "dependencies": {
-          "EnterpriseLibrary.Common": "6.0.0"
-        },
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
-        "compile": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
-        },
-        "runtime": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights/1.1.1-beta": {
+      "Microsoft.ApplicationInsights/2.1.0-beta3": {
         "type": "package",
         "compile": {
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
@@ -52,15 +12,29 @@
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+      "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.1.1-beta",
+          "Microsoft.ApplicationInsights": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.DependencyCollector": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.PerfCounterCollector": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel": "2.1.0-beta3",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Features": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+          "Microsoft.Diagnostics.Tracing.EventSource.Redist": "1.1.28",
           "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Configuration.json": "1.0.0-rc1-final",
           "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final"
         },
@@ -75,6 +49,43 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.DependencyCollector/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]",
+          "Microsoft.ApplicationInsights.Agent.Intercept": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.PerfCounterCollector/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.ServerTelemetryChannel.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.ServerTelemetryChannel.dll": {}
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -98,6 +109,50 @@
         },
         "runtime": {
           "lib/net451/Microsoft.AspNet.Antiforgery.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Authentication/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.DataProtection": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Authentication.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Authentication.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Authentication.Cookies/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders": "1.0.0-rc1-final",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Authentication.Cookies.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Authentication.Cookies.dll": {}
         }
       },
       "Microsoft.AspNet.Authorization/1.0.0-rc1-final": {
@@ -200,6 +255,33 @@
           "lib/net451/Microsoft.AspNet.DataProtection.Abstractions.dll": {}
         }
       },
+      "Microsoft.AspNet.Diagnostics/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Diagnostics.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.AspNet.FileProviders.Physical": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+          "Microsoft.AspNet.WebUtilities": "1.0.0-rc1-final",
+          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders.Core": "1.0.0-rc1-final",
+          "System.Diagnostics.DiagnosticSource": "4.0.0-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Diagnostics.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Diagnostics.dll": {}
+        }
+      },
       "Microsoft.AspNet.Diagnostics.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "frameworkAssemblies": [
@@ -231,6 +313,24 @@
         },
         "runtime": {
           "lib/net451/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.FileProviders.Embedded.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.FileProviders.Embedded.dll": {}
         }
       },
       "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc1-final": {
@@ -897,6 +997,15 @@
           "lib/net45/Microsoft.CodeAnalysis.CSharp.dll": {}
         }
       },
+      "Microsoft.Diagnostics.Tracing.EventSource.Redist/1.1.28": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll": {}
+        }
+      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -1119,6 +1228,26 @@
         },
         "runtime": {
           "lib/net451/Microsoft.Extensions.Configuration.FileProviderExtensions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.json/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc1-final",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Extensions.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Extensions.Configuration.Json.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Json/1.0.0-rc1-final": {
@@ -1457,8 +1586,8 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "MySql.Data": "6.9.8",
           "SolutionsAI.Data.MySql": "1.0.0",
           "SolutionsAI.DataInterface": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
@@ -1489,6 +1618,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "MySql.Data": "6.9.8",
           "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
@@ -1499,6 +1629,44 @@
       "SolutionsAI.Domain/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1"
+      },
+      "Swashbuckle.SwaggerGen/6.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.SwaggerGen.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.SwaggerGen.dll": {}
+        }
+      },
+      "Swashbuckle.SwaggerUi/6.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+          "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.SwaggerUi.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.SwaggerUi.dll": {}
+        }
       },
       "System.Collections/4.0.0": {
         "type": "package",
@@ -1713,47 +1881,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
-      "Data/1.1.0": {
-        "type": "package",
-        "dependencies": {
-          "EnterpriseLibrary.Common": "6.0.1304",
-          "EnterpriseLibrary.Data": "6.0.1304"
-        },
-        "compile": {
-          "lib/Data.dll": {}
-        },
-        "runtime": {
-          "lib/Data.dll": {}
-        }
-      },
-      "EnterpriseLibrary.Common/6.0.1304": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
-        "compile": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
-        },
-        "runtime": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
-        }
-      },
-      "EnterpriseLibrary.Data/6.0.1304": {
-        "type": "package",
-        "dependencies": {
-          "EnterpriseLibrary.Common": "6.0.0"
-        },
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
-        "compile": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
-        },
-        "runtime": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights/1.1.1-beta": {
+      "Microsoft.ApplicationInsights/2.1.0-beta3": {
         "type": "package",
         "compile": {
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
@@ -1762,15 +1890,29 @@
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+      "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.1.1-beta",
+          "Microsoft.ApplicationInsights": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.DependencyCollector": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.PerfCounterCollector": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel": "2.1.0-beta3",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Features": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+          "Microsoft.Diagnostics.Tracing.EventSource.Redist": "1.1.28",
           "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Configuration.json": "1.0.0-rc1-final",
           "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final"
         },
@@ -1785,6 +1927,43 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.DependencyCollector/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]",
+          "Microsoft.ApplicationInsights.Agent.Intercept": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.PerfCounterCollector/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.ServerTelemetryChannel.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.ServerTelemetryChannel.dll": {}
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -1808,6 +1987,50 @@
         },
         "runtime": {
           "lib/net451/Microsoft.AspNet.Antiforgery.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Authentication/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.DataProtection": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Authentication.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Authentication.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Authentication.Cookies/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders": "1.0.0-rc1-final",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Authentication.Cookies.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Authentication.Cookies.dll": {}
         }
       },
       "Microsoft.AspNet.Authorization/1.0.0-rc1-final": {
@@ -1910,6 +2133,33 @@
           "lib/net451/Microsoft.AspNet.DataProtection.Abstractions.dll": {}
         }
       },
+      "Microsoft.AspNet.Diagnostics/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Diagnostics.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.AspNet.FileProviders.Physical": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+          "Microsoft.AspNet.WebUtilities": "1.0.0-rc1-final",
+          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders.Core": "1.0.0-rc1-final",
+          "System.Diagnostics.DiagnosticSource": "4.0.0-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Diagnostics.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Diagnostics.dll": {}
+        }
+      },
       "Microsoft.AspNet.Diagnostics.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1941,6 +2191,24 @@
         },
         "runtime": {
           "lib/net451/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.FileProviders.Embedded.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.FileProviders.Embedded.dll": {}
         }
       },
       "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc1-final": {
@@ -2610,6 +2878,15 @@
           "lib/net45/Microsoft.CodeAnalysis.CSharp.dll": {}
         }
       },
+      "Microsoft.Diagnostics.Tracing.EventSource.Redist/1.1.28": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll": {}
+        }
+      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -2832,6 +3109,26 @@
         },
         "runtime": {
           "lib/net451/Microsoft.Extensions.Configuration.FileProviderExtensions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.json/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc1-final",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Extensions.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Extensions.Configuration.Json.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Json/1.0.0-rc1-final": {
@@ -3170,8 +3467,8 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "MySql.Data": "6.9.8",
           "SolutionsAI.Data.MySql": "1.0.0",
           "SolutionsAI.DataInterface": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
@@ -3202,6 +3499,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "MySql.Data": "6.9.8",
           "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
@@ -3212,6 +3510,44 @@
       "SolutionsAI.Domain/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1"
+      },
+      "Swashbuckle.SwaggerGen/6.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.SwaggerGen.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.SwaggerGen.dll": {}
+        }
+      },
+      "Swashbuckle.SwaggerUi/6.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+          "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.SwaggerUi.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.SwaggerUi.dll": {}
+        }
       },
       "System.Collections/4.0.0": {
         "type": "package",
@@ -3426,47 +3762,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
-      "Data/1.1.0": {
-        "type": "package",
-        "dependencies": {
-          "EnterpriseLibrary.Common": "6.0.1304",
-          "EnterpriseLibrary.Data": "6.0.1304"
-        },
-        "compile": {
-          "lib/Data.dll": {}
-        },
-        "runtime": {
-          "lib/Data.dll": {}
-        }
-      },
-      "EnterpriseLibrary.Common/6.0.1304": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
-        "compile": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
-        },
-        "runtime": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
-        }
-      },
-      "EnterpriseLibrary.Data/6.0.1304": {
-        "type": "package",
-        "dependencies": {
-          "EnterpriseLibrary.Common": "6.0.0"
-        },
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
-        "compile": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
-        },
-        "runtime": {
-          "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll": {}
-        }
-      },
-      "Microsoft.ApplicationInsights/1.1.1-beta": {
+      "Microsoft.ApplicationInsights/2.1.0-beta3": {
         "type": "package",
         "compile": {
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
@@ -3475,15 +3771,29 @@
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+      "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.1.1-beta",
+          "Microsoft.ApplicationInsights": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.DependencyCollector": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.PerfCounterCollector": "2.1.0-beta3",
+          "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel": "2.1.0-beta3",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Features": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+          "Microsoft.Diagnostics.Tracing.EventSource.Redist": "1.1.28",
           "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Configuration.json": "1.0.0-rc1-final",
           "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final"
         },
@@ -3498,6 +3808,43 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.DependencyCollector/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]",
+          "Microsoft.ApplicationInsights.Agent.Intercept": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.PerfCounterCollector/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel/2.1.0-beta3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.1.0-beta3]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.ServerTelemetryChannel.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.ServerTelemetryChannel.dll": {}
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -3521,6 +3868,50 @@
         },
         "runtime": {
           "lib/net451/Microsoft.AspNet.Antiforgery.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Authentication/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.DataProtection": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Authentication.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Authentication.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Authentication.Cookies/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Authentication": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders": "1.0.0-rc1-final",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Authentication.Cookies.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Authentication.Cookies.dll": {}
         }
       },
       "Microsoft.AspNet.Authorization/1.0.0-rc1-final": {
@@ -3623,6 +4014,33 @@
           "lib/net451/Microsoft.AspNet.DataProtection.Abstractions.dll": {}
         }
       },
+      "Microsoft.AspNet.Diagnostics/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Diagnostics.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.AspNet.FileProviders.Physical": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+          "Microsoft.AspNet.WebUtilities": "1.0.0-rc1-final",
+          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "Microsoft.Extensions.WebEncoders.Core": "1.0.0-rc1-final",
+          "System.Diagnostics.DiagnosticSource": "4.0.0-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "System.Runtime"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.Diagnostics.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.Diagnostics.dll": {}
+        }
+      },
       "Microsoft.AspNet.Diagnostics.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "frameworkAssemblies": [
@@ -3654,6 +4072,24 @@
         },
         "runtime": {
           "lib/net451/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.AspNet.FileProviders.Embedded.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.AspNet.FileProviders.Embedded.dll": {}
         }
       },
       "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc1-final": {
@@ -4323,6 +4759,15 @@
           "lib/net45/Microsoft.CodeAnalysis.CSharp.dll": {}
         }
       },
+      "Microsoft.Diagnostics.Tracing.EventSource.Redist/1.1.28": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll": {}
+        }
+      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -4545,6 +4990,26 @@
         },
         "runtime": {
           "lib/net451/Microsoft.Extensions.Configuration.FileProviderExtensions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.json/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+          "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc1-final",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Extensions.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Extensions.Configuration.Json.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Json/1.0.0-rc1-final": {
@@ -4883,8 +5348,8 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+          "MySql.Data": "6.9.8",
           "SolutionsAI.Data.MySql": "1.0.0",
           "SolutionsAI.DataInterface": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
@@ -4915,6 +5380,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "MySql.Data": "6.9.8",
           "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
@@ -4925,6 +5391,44 @@
       "SolutionsAI.Domain/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1"
+      },
+      "Swashbuckle.SwaggerGen/6.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc": "6.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.SwaggerGen.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.SwaggerGen.dll": {}
+        }
+      },
+      "Swashbuckle.SwaggerUi/6.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-rc1-final",
+          "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+          "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.SwaggerUi.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.SwaggerUi.dll": {}
+        }
       },
       "System.Collections/4.0.0": {
         "type": "package",
@@ -5160,76 +5664,94 @@
       "type": "project",
       "path": "../SolutionsAI.Domain/project.json"
     },
-    "Data/1.1.0": {
+    "Microsoft.ApplicationInsights/2.1.0-beta3": {
       "type": "package",
-      "sha512": "ZaXJgLF6CYIMBH5+WwSpTG2yJckb1fJHHIsC+lMjEgSWgUEu4PHaq2VYw2YZle8rf1KI8PGPuS9hM6GiA0/YXw==",
+      "sha512": "DIycgWuo44enRddb5M8/0PZRM9FG3w5DOpNj/vraCY7UI/XmmYLy6Gq38B6weZk8NN1dBlBdxOlV3siKFlbS3Q==",
       "files": [
-        "content/_._",
-        "Data.1.1.0.nupkg",
-        "Data.1.1.0.nupkg.sha512",
-        "Data.nuspec",
-        "lib/Data.dll"
-      ]
-    },
-    "EnterpriseLibrary.Common/6.0.1304": {
-      "type": "package",
-      "sha512": "w/ua1PWAQD1/CnJ+qz/5APgmqI/1YnbamnwFGSotm7b66sFIkrnfLC+9+WzcSZWnePwwUw3Pl2QsLVDyX7NwaQ==",
-      "files": [
-        "EnterpriseLibrary.Common.6.0.1304.nupkg",
-        "EnterpriseLibrary.Common.6.0.1304.nupkg.sha512",
-        "EnterpriseLibrary.Common.nuspec",
-        "EnterpriseLibrary.Configuration.xsd",
-        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.dll",
-        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Common.xml",
-        "tools/install.ps1",
-        "tools/Utils.psm1",
-        "Update-EntlibConfiguration.ps1"
-      ]
-    },
-    "EnterpriseLibrary.Data/6.0.1304": {
-      "type": "package",
-      "sha512": "FmaIrwbO7qOg0hd6rESeltyxcOccBa9V5QXPQ/4vMzpqZXh457uiJcwV4Xtx8q1zFhiGq1AszYjWP1p69Qps+w==",
-      "files": [
-        "EnterpriseLibrary.Data.6.0.1304.nupkg",
-        "EnterpriseLibrary.Data.6.0.1304.nupkg.sha512",
-        "EnterpriseLibrary.Data.nuspec",
-        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.dll",
-        "lib/NET45/Microsoft.Practices.EnterpriseLibrary.Data.xml",
-        "Readme.txt",
-        "tools/install.ps1",
-        "tools/Utils.psm1"
-      ]
-    },
-    "Microsoft.ApplicationInsights/1.1.1-beta": {
-      "type": "package",
-      "sha512": "aqtQ8KNFMGBFCmU3kkkEM7PlyPFvfh/1uKTxixD+myMzB9EjYeGOf0LvFnpkT1sp3voXfU8MUN+eYets8TutdQ==",
-      "files": [
-        "lib/dnxcore50/Microsoft.ApplicationInsights.dll",
-        "lib/dnxcore50/Microsoft.ApplicationInsights.XML",
+        "lib/dotnet5.4/Microsoft.ApplicationInsights.dll",
+        "lib/dotnet5.4/Microsoft.ApplicationInsights.XML",
         "lib/net40/Microsoft.ApplicationInsights.dll",
         "lib/net40/Microsoft.ApplicationInsights.XML",
         "lib/net45/Microsoft.ApplicationInsights.dll",
         "lib/net45/Microsoft.ApplicationInsights.XML",
+        "lib/net46/Microsoft.ApplicationInsights.dll",
+        "lib/net46/Microsoft.ApplicationInsights.XML",
         "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.XML",
+        "lib/uap10.0/Microsoft.ApplicationInsights.dll",
         "lib/wp8/Microsoft.ApplicationInsights.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.XML",
-        "Microsoft.ApplicationInsights.1.1.1-beta.nupkg",
-        "Microsoft.ApplicationInsights.1.1.1-beta.nupkg.sha512",
+        "Microsoft.ApplicationInsights.2.1.0-beta3.nupkg",
+        "Microsoft.ApplicationInsights.2.1.0-beta3.nupkg.sha512",
         "Microsoft.ApplicationInsights.nuspec"
       ]
     },
-    "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+    "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
       "type": "package",
-      "sha512": "cFxg3E6Z9otsuBOKhiLqxb5H/B6wbvjvMfu+v3wG8KEJvZ2ZAzNhAXbxE69baweyWzokj5nsI+9YeSXNWacBHA==",
+      "sha512": "nuqnTp+xechqRPBUi7sr4gxhyr+gJwMaxvSrhB4NyK1TbnT3yk1P5giSnaqQVvuIRHAdl9uD7lt2GRx/P/nlrA==",
+      "files": [
+        "lib/net40/Microsoft.AI.Agent.Intercept.dll",
+        "lib/net45/Microsoft.AI.Agent.Intercept.dll",
+        "Microsoft.ApplicationInsights.Agent.Intercept.1.2.1.nupkg",
+        "Microsoft.ApplicationInsights.Agent.Intercept.1.2.1.nupkg.sha512",
+        "Microsoft.ApplicationInsights.Agent.Intercept.nuspec"
+      ]
+    },
+    "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update4": {
+      "type": "package",
+      "sha512": "GltMThmrM1hZXNNGDSuxI/LzEj6DhcCzhrfbXQ/8OEGZ3SokEGd2nMl3s5VvHz9hsj6VSanahhhT/O0l47hqKQ==",
       "files": [
         "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll",
         "lib/dnx451/Microsoft.ApplicationInsights.AspNet.xml",
         "lib/dnxcore50/Microsoft.ApplicationInsights.AspNet.dll",
         "lib/dnxcore50/Microsoft.ApplicationInsights.AspNet.xml",
-        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1.nupkg",
-        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1.nupkg.sha512",
+        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1-update4.nupkg",
+        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1-update4.nupkg.sha512",
         "Microsoft.ApplicationInsights.AspNet.nuspec"
+      ]
+    },
+    "Microsoft.ApplicationInsights.DependencyCollector/2.1.0-beta3": {
+      "type": "package",
+      "sha512": "izWgPUZ4Lt4ARUlOkYWttNu+i7X6gPYYyD6yUIrjUca9T/3YQm0fzgZ+HYQD8bh3pKnvuUcxpYyaUlABoFfTgg==",
+      "files": [
+        "content/ApplicationInsights.config.install.xdt",
+        "content/ApplicationInsights.config.transform",
+        "content/ApplicationInsights.config.uninstall.xdt",
+        "lib/net40/Microsoft.AI.DependencyCollector.dll",
+        "lib/net40/Microsoft.AI.DependencyCollector.XML",
+        "lib/net45/Microsoft.AI.DependencyCollector.dll",
+        "lib/net45/Microsoft.AI.DependencyCollector.XML",
+        "Microsoft.ApplicationInsights.DependencyCollector.2.1.0-beta3.nupkg",
+        "Microsoft.ApplicationInsights.DependencyCollector.2.1.0-beta3.nupkg.sha512",
+        "Microsoft.ApplicationInsights.DependencyCollector.nuspec"
+      ]
+    },
+    "Microsoft.ApplicationInsights.PerfCounterCollector/2.1.0-beta3": {
+      "type": "package",
+      "sha512": "3Lo3DDs0kWO2mzxETwkQ2+MF5UiNVphjlPym0L/BnVpzF3VIA9kcbSI/VJBCXnVlBw2BJ0kiufuQ4Bh8qLLf5g==",
+      "files": [
+        "content/ApplicationInsights.config.install.xdt",
+        "content/ApplicationInsights.config.transform",
+        "content/ApplicationInsights.config.uninstall.xdt",
+        "lib/net40/Microsoft.AI.PerfCounterCollector.dll",
+        "lib/net45/Microsoft.AI.PerfCounterCollector.dll",
+        "Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0-beta3.nupkg",
+        "Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0-beta3.nupkg.sha512",
+        "Microsoft.ApplicationInsights.PerfCounterCollector.nuspec"
+      ]
+    },
+    "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel/2.1.0-beta3": {
+      "type": "package",
+      "sha512": "pkaPmNcAwdbzrbaXZHoNV7WvctCb6TPB+aLrS/4yPcrhLaIR/wBWX4Bctr4wBNT1few5lUB2BU9CEQFbvMea2g==",
+      "files": [
+        "content/ApplicationInsights.config.install.xdt",
+        "content/ApplicationInsights.config.transform",
+        "content/ApplicationInsights.config.uninstall.xdt",
+        "lib/net40/Microsoft.AI.ServerTelemetryChannel.dll",
+        "lib/net40/Microsoft.AI.ServerTelemetryChannel.XML",
+        "lib/net45/Microsoft.AI.ServerTelemetryChannel.dll",
+        "lib/net45/Microsoft.AI.ServerTelemetryChannel.XML",
+        "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0-beta3.nupkg",
+        "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0-beta3.nupkg.sha512",
+        "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.nuspec"
       ]
     },
     "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -5244,6 +5766,34 @@
         "Microsoft.AspNet.Antiforgery.1.0.0-rc1-final.nupkg",
         "Microsoft.AspNet.Antiforgery.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.AspNet.Antiforgery.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Authentication/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sdFCeQlwkJXZ1KHsRvf7ewNEWkEeKYNpcEKKC0D+WNUvLliziLc7cMH+6sjNmTU3FgGjGrSk4WjGQMhsOHCrDQ==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Authentication.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Authentication.xml",
+        "lib/net451/Microsoft.AspNet.Authentication.dll",
+        "lib/net451/Microsoft.AspNet.Authentication.xml",
+        "Microsoft.AspNet.Authentication.1.0.0-rc1-final.nupkg",
+        "Microsoft.AspNet.Authentication.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.AspNet.Authentication.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Authentication.Cookies/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "vjeSG8Z5i5Kqo1nC7wW1BO+YMk+gs/AVVJlmyF7EGgiUBtAAPkrgjxSabQqvFhPgpEFledUQ6gkhKXgr4WrMtw==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Authentication.Cookies.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Authentication.Cookies.xml",
+        "lib/net451/Microsoft.AspNet.Authentication.Cookies.dll",
+        "lib/net451/Microsoft.AspNet.Authentication.Cookies.xml",
+        "Microsoft.AspNet.Authentication.Cookies.1.0.0-rc1-final.nupkg",
+        "Microsoft.AspNet.Authentication.Cookies.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.AspNet.Authentication.Cookies.nuspec"
       ]
     },
     "Microsoft.AspNet.Authorization/1.0.0-rc1-final": {
@@ -5316,6 +5866,20 @@
         "Microsoft.AspNet.DataProtection.Abstractions.nuspec"
       ]
     },
+    "Microsoft.AspNet.Diagnostics/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "PlLhXpe74DUMEanyFNvo+A96zD465usPOxu2iAqREnfcpagNJY4dn6uQxDE04BY6XcqPaYAYcrZYyKRfn/pTIg==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.Diagnostics.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.Diagnostics.xml",
+        "lib/net451/Microsoft.AspNet.Diagnostics.dll",
+        "lib/net451/Microsoft.AspNet.Diagnostics.xml",
+        "Microsoft.AspNet.Diagnostics.1.0.0-rc1-final.nupkg",
+        "Microsoft.AspNet.Diagnostics.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.AspNet.Diagnostics.nuspec"
+      ]
+    },
     "Microsoft.AspNet.Diagnostics.Abstractions/1.0.0-rc1-final": {
       "type": "package",
       "serviceable": true,
@@ -5342,6 +5906,20 @@
         "Microsoft.AspNet.FileProviders.Abstractions.1.0.0-rc1-final.nupkg",
         "Microsoft.AspNet.FileProviders.Abstractions.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.AspNet.FileProviders.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.FileProviders.Embedded/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "MWMhV2n9CHQHIJpgGVCguXyeh+6c0GpABHH+Z12HY9nyNU56slop1KLa7eSN4Z6oojKm/eMoP79EIihj5GokDQ==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.AspNet.FileProviders.Embedded.dll",
+        "lib/dotnet5.4/Microsoft.AspNet.FileProviders.Embedded.xml",
+        "lib/net451/Microsoft.AspNet.FileProviders.Embedded.dll",
+        "lib/net451/Microsoft.AspNet.FileProviders.Embedded.xml",
+        "Microsoft.AspNet.FileProviders.Embedded.1.0.0-rc1-final.nupkg",
+        "Microsoft.AspNet.FileProviders.Embedded.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.AspNet.FileProviders.Embedded.nuspec"
       ]
     },
     "Microsoft.AspNet.FileProviders.Physical/1.0.0-rc1-final": {
@@ -5834,6 +6412,25 @@
         "ThirdPartyNotices.rtf"
       ]
     },
+    "Microsoft.Diagnostics.Tracing.EventSource.Redist/1.1.28": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "pn07chRDMdeug9sHbuNlAEZG8ZN3zKgE07IMJG7qPeoQlX6ve01rKTwknKCY/2CVacRP78ONzykV8am84gxc2g==",
+      "files": [
+        "lib/net35/Microsoft.Diagnostics.Tracing.EventSource.dll",
+        "lib/net35/Microsoft.Diagnostics.Tracing.EventSource.XML",
+        "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.dll",
+        "lib/net40/Microsoft.Diagnostics.Tracing.EventSource.XML",
+        "lib/net46/Microsoft.Diagnostics.Tracing.EventSource.dll",
+        "lib/net46/Microsoft.Diagnostics.Tracing.EventSource.XML",
+        "lib/portable-win8+wpa81/Microsoft.Diagnostics.Tracing.EventSource.dll",
+        "lib/portable-win8+wpa81/Microsoft.Diagnostics.Tracing.EventSource.XML",
+        "License-Stable.rtf",
+        "Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28.nupkg",
+        "Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28.nupkg.sha512",
+        "Microsoft.Diagnostics.Tracing.EventSource.Redist.nuspec"
+      ]
+    },
     "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
       "type": "package",
       "serviceable": true,
@@ -6018,6 +6615,22 @@
         "Microsoft.Extensions.Configuration.FileProviderExtensions.1.0.0-rc1-final.nupkg",
         "Microsoft.Extensions.Configuration.FileProviderExtensions.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.Extensions.Configuration.FileProviderExtensions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Configuration.json/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "9v+RpswnXEpAP5mx8J1w1yZZT2pPtMBTnOAauNh2c9ju5Dhq3ljxvbm0S9j6o5F/EFSLlbfN/brxTJN3qa/upw==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.Extensions.Configuration.Json.dll",
+        "lib/dotnet5.4/Microsoft.Extensions.Configuration.Json.xml",
+        "lib/net451/Microsoft.Extensions.Configuration.Json.dll",
+        "lib/net451/Microsoft.Extensions.Configuration.Json.xml",
+        "lib/netcore50/Microsoft.Extensions.Configuration.Json.dll",
+        "lib/netcore50/Microsoft.Extensions.Configuration.Json.xml",
+        "Microsoft.Extensions.Configuration.Json.1.0.0-rc1-final.nupkg",
+        "Microsoft.Extensions.Configuration.Json.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.Extensions.Configuration.Json.nuspec"
       ]
     },
     "Microsoft.Extensions.Configuration.Json/1.0.0-rc1-final": {
@@ -6329,6 +6942,32 @@
         "Newtonsoft.Json.6.0.6.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
+      ]
+    },
+    "Swashbuckle.SwaggerGen/6.0.0-rc1-final": {
+      "type": "package",
+      "sha512": "YfkBm+xYruoKJzVpaDFZQzwPF59CyrYe0d4bb3kKGeJ+vi20xYfzzk9j2PXZ/BiP8xJ59pkVrRUZOyeceP3eNQ==",
+      "files": [
+        "lib/dnx451/Swashbuckle.SwaggerGen.dll",
+        "lib/dnx451/Swashbuckle.SwaggerGen.xml",
+        "lib/dnxcore50/Swashbuckle.SwaggerGen.dll",
+        "lib/dnxcore50/Swashbuckle.SwaggerGen.xml",
+        "Swashbuckle.SwaggerGen.6.0.0-rc1-final.nupkg",
+        "Swashbuckle.SwaggerGen.6.0.0-rc1-final.nupkg.sha512",
+        "Swashbuckle.SwaggerGen.nuspec"
+      ]
+    },
+    "Swashbuckle.SwaggerUi/6.0.0-rc1-final": {
+      "type": "package",
+      "sha512": "h/yK4Pq2SJNPwrWEVvP6UHnZBfi0MnesCa1ZgV5HKI/PRp1dq/BXPrAZi2VB1oz1PU+F0zsaVfZf31BTxg6NzA==",
+      "files": [
+        "lib/dnx451/Swashbuckle.SwaggerUi.dll",
+        "lib/dnx451/Swashbuckle.SwaggerUi.xml",
+        "lib/dnxcore50/Swashbuckle.SwaggerUi.dll",
+        "lib/dnxcore50/Swashbuckle.SwaggerUi.xml",
+        "Swashbuckle.SwaggerUi.6.0.0-rc1-final.nupkg",
+        "Swashbuckle.SwaggerUi.6.0.0-rc1-final.nupkg.sha512",
+        "Swashbuckle.SwaggerUi.nuspec"
       ]
     },
     "System.Collections/4.0.0": {
@@ -7108,18 +7747,21 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Data >= 1.0.0-*",
-      "Microsoft.ApplicationInsights.AspNet >= 1.0.0-rc1",
+      "Microsoft.ApplicationInsights.AspNet >= 1.0.0-rc1-update4",
+      "Microsoft.AspNet.Authentication.Cookies >= 1.0.0-rc1-final",
+      "Microsoft.AspNet.Authorization >= 1.0.0-rc1-final",
+      "Microsoft.AspNet.Diagnostics >= 1.0.0-rc1-final",
       "Microsoft.AspNet.IISPlatformHandler >= 1.0.0-rc1-final",
       "Microsoft.AspNet.Mvc >= 6.0.0-rc1-final",
       "Microsoft.AspNet.Server.Kestrel >= 1.0.0-rc1-final",
       "Microsoft.AspNet.StaticFiles >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Configuration.FileProviderExtensions >= 1.0.0-rc1-final",
-      "Microsoft.Extensions.Configuration.Json >= 1.0.0-rc1-final",
-      "Microsoft.Extensions.Logging >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Console >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
-      "SolutionsAI.BusinessLogic >= 1.0.0-*"
+      "MySql.Data >= 6.9.8",
+      "SolutionsAI.BusinessLogic >= 1.0.0-*",
+      "Swashbuckle.SwaggerGen >= 6.0.0-rc1-final",
+      "Swashbuckle.SwaggerUi >= 6.0.0-rc1-final"
     ],
     "DNX,Version=v4.5.1": []
   }

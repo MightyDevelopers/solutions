@@ -138,6 +138,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "MySql.Data": "6.9.8",
           "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
@@ -286,6 +287,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "MySql.Data": "6.9.8",
           "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
@@ -434,6 +436,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "MySql.Data": "6.9.8",
           "SolutionsAI.DatabaseTools": "1.0.0",
           "SolutionsAI.Domain": "1.0.0"
         },
@@ -580,8 +583,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.0.0-rc1-final",
       "Microsoft.Extensions.OptionsModel >= 1.0.0-rc1-final",
+      "MySql.Data >= 6.9.8",
       "SolutionsAI.Data.MySql >= 1.0.0-*",
       "SolutionsAI.DataInterface >= 1.0.0-*",
       "SolutionsAI.Domain >= 1.0.0-*"

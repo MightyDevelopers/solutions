@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SolutionsAI.BusinessLogic;
 using SolutionsAI.DatabaseTools;
-using SolutionsAI.DataInterface.DataRetrievers;
 
 namespace SolutionsAI
 {
@@ -35,14 +36,24 @@ namespace SolutionsAI
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddAuthorization();
+
             services.AddOptions();
 
             services.Configure<ConnectionOptions>(Configuration);
 
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             services.AddCors();
-            
+
+            services.AddSwaggerGen();
+
             services.AddRepositoryRegistrations();
         }
 
@@ -53,6 +64,11 @@ namespace SolutionsAI
             loggerFactory.AddDebug();
 
             app.UseIISPlatformHandler();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseApplicationInsightsRequestTelemetry();
 
@@ -67,7 +83,17 @@ namespace SolutionsAI
                     .AllowAnyOrigin();
             });
 
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = "Cookie";
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = false;
+            });
+
             app.UseMvc();
+
+            app.UseSwaggerUi();
+            app.UseSwaggerGen();
         }
 
         // Entry point for the application.

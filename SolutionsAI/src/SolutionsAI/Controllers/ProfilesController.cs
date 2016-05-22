@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using SolutionsAI.BusinessLogic.Services.Interface;
 using SolutionsAI.Domain;
 
 namespace SolutionsAI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ProfilesController : Controller
     {
@@ -16,7 +22,7 @@ namespace SolutionsAI.Controllers
         }
 
         // GET: api/values
-        [HttpGet]
+        [HttpGet(Name = "GetProfile")]
         public IEnumerable<Profile> Get()
         {
             return ProfileRepository.GetAllUsers().Result;
@@ -32,7 +38,12 @@ namespace SolutionsAI.Controllers
         [HttpGet("{email}")]
         public Profile Get(string email)
         {
-            return ProfileRepository.GetUserProfile(email).Result;
+            if (User.Claims.Any(claim => claim.Type == ClaimTypes.Email && claim.Value == email))
+            {
+                return ProfileRepository.GetUserProfile(email).Result;
+            }
+            Response.StatusCode = 403;
+            return null;
         }
 
         // POST api/values

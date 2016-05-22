@@ -18,8 +18,8 @@ namespace SolutionsAI.DataInterface.DataRetrievers
             return new Profile
             {
                 EMail = dataReader.GetString(EmailOrdinal),
-                FirstName = dataReader.GetString(FirstNameOrdinal),
-                LastName = dataReader.GetString(LastNameOrdinal),
+                FirstName = dataReader.GetNullable(FirstNameOrdinal),
+                LastName = dataReader.GetNullable(LastNameOrdinal),
                 LastUpdateDate = dataReader.GetUtcDateTime(LastUpdateDateOrdinal),
                 RegistrationDate = dataReader.GetUtcDateTime(RegistrationDateOrdinal)
             };
@@ -30,8 +30,8 @@ namespace SolutionsAI.DataInterface.DataRetrievers
             return new Profile
             {
                 EMail = dataReader["Email"].ToString(),
-                FirstName = dataReader["FirstName"].ToString(),
-                LastName = dataReader["LastName"].ToString(),
+                FirstName = dataReader.GetNullable("FirstName"),
+                LastName = dataReader.GetNullable("LastName"),
                 LastUpdateDate = dataReader.GetUtcDateTime("LastUpdateDate"),
                 RegistrationDate = dataReader.GetUtcDateTime("RegistrationDate")
             };

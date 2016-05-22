@@ -9,9 +9,9 @@ namespace SolutionsAI.BusinessLogic.Services.Implementation
     public class ProfileService: IProfileService
     {
         private readonly GetAllProfilesCommand _getAllProfilesCommand;
-        private readonly GetProfileByEmail _getProfileByEmail;
+        private readonly GetProfileByEmailCommand _getProfileByEmail;
 
-        public ProfileService(GetAllProfilesCommand getAllProfilesCommand, GetProfileByEmail getProfileByEmail)
+        public ProfileService(GetAllProfilesCommand getAllProfilesCommand, GetProfileByEmailCommand getProfileByEmail)
         {
             _getAllProfilesCommand = getAllProfilesCommand;
             _getProfileByEmail = getProfileByEmail;
