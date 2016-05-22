@@ -6,6 +6,7 @@ using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Http.Authentication;
 using Microsoft.AspNet.Mvc;
 using SolutionsAI.BusinessLogic.Services.Interface;
+using SolutionsAI.DataInterface.Commands.Base;
 using SolutionsAI.Domain;
 
 namespace SolutionsAI.Controllers
@@ -20,7 +21,10 @@ namespace SolutionsAI.Controllers
         {
             UserService = userService;
         }
-
+        /// <summary>
+        /// Sign in method
+        /// </summary>
+        /// <param name="user">Data required for authentication</param>
         [HttpPost]
         [AllowAnonymous]
         public void Authorize([FromBody] User user)
@@ -35,11 +39,17 @@ namespace SolutionsAI.Controllers
             }
         }
 
+        /// <summary>
+        /// Register new User
+        /// </summary>
+        /// <param name="user"></param>
         [HttpPost("new")]
         [AllowAnonymous]
         public void Register([FromBody] User user)
         {
-            
+            var commandResult = UserService.CreateUser(user);
+            if (commandResult.State == CommandResultState.Success)
+            SignIn(commandResult.Result.EMail);
         }
 
         private void SignIn(string email)
