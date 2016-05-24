@@ -5,6 +5,7 @@ using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using SolutionsAI.BusinessLogic.Services.Interface;
 using SolutionsAI.Domain;
+using SolutionsAI.Interfaces;
 
 namespace SolutionsAI.Controllers
 {
@@ -13,7 +14,7 @@ namespace SolutionsAI.Controllers
     /// </summary>
     [Authorize]
     [Route("api/[controller]")]
-    public class ProfilesController : Controller
+    public class ProfilesController : Controller, IProfileController
     {
         private IProfileService ProfileRepository { get; set; }
 
@@ -22,21 +23,12 @@ namespace SolutionsAI.Controllers
             ProfileRepository = profileRepository;
         }
 
-        /// <summary>
-        /// Returns list of profiles
-        /// </summary>
-        /// <returns>All profiles</returns>
         [HttpGet(Name = "GetProfile")]
         public IEnumerable<Profile> Get()
         {
             return ProfileRepository.GetAllUsers().Result;
         }
 
-        /// <summary>
-        /// Returns user's profile by email. (You can get only your profile right now.)
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
         [HttpGet("{email}")]
         public Profile Get(string email)
         {
