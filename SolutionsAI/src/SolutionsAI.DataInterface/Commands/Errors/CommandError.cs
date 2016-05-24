@@ -8,5 +8,6 @@ namespace SolutionsAI.DataInterface.Commands.Errors
         public CommandState LastState { get; set; }
         public Exception Exception { get; set; }
         public CommandErrorLogSource LogSource { get; set; }
+        public string Message { get; set; }
     }
 }

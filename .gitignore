@@ -39,3 +39,4 @@ bower.json
 .powenv
 /SolutionsAI/PublishScripts
 /SolutionsAI/src/SolutionsAI/appsettings.json
+/SolutionsAI/.vs
