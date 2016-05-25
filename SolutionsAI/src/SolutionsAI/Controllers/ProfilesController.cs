@@ -6,6 +6,8 @@ using Microsoft.AspNet.Mvc;
 using SolutionsAI.BusinessLogic.Services.Interface;
 using SolutionsAI.Domain;
 using SolutionsAI.Interfaces;
+using SolutionsAI.Response;
+using SolutionsAI.Utility;
 
 namespace SolutionsAI.Controllers
 {
@@ -24,17 +26,17 @@ namespace SolutionsAI.Controllers
         }
 
         [HttpGet(Name = "GetProfile")]
-        public IEnumerable<Profile> Get()
+        public GenericResponse<IEnumerable<Profile>> Get()
         {
-            return ProfileRepository.GetAllUsers().Result;
+            return this.GetGenericResponse(() => ProfileRepository.GetAllUsers());
         }
 
         [HttpGet("{email}")]
-        public Profile Get(string email)
+        public GenericResponse<Profile> Get(string email)
         {
             if (User.Claims.Any(claim => claim.Type == ClaimTypes.Email && claim.Value == email))
             {
-                return ProfileRepository.GetUserProfile(email).Result;
+                return this.GetGenericResponse(()=>ProfileRepository.GetUserProfile(email));
             }
             Response.StatusCode = 403;
             return null;
