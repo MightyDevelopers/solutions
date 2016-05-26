@@ -18,20 +18,38 @@ namespace SolutionsAI.DatabaseTools
 
         public virtual TEntity GetItem(string commandText, params IDbDataParameter[] parameters)
         {
-            return ExecuteUsingConnection(reader => _dataRetriever.GetValue(reader), GetStoredProcedureCommand(commandText, parameters));
+            return ExecuteReaderExecuteUsingConnection(reader => _dataRetriever.GetValue(reader), GetStoredProcedureCommand(commandText, parameters));
         }
 
         public virtual IEnumerable<TEntity> GetItems(string commandText, params IDbDataParameter[] parameters)
         {
-            return ExecuteUsingConnection(_dataRetriever.GetValues, GetStoredProcedureCommand(commandText, parameters));
+            return ExecuteReaderExecuteUsingConnection(_dataRetriever.GetValues, GetStoredProcedureCommand(commandText, parameters));
         }
 
         public bool HasResult(string commandText, params IDbDataParameter[] parameters)
         {
-            return ExecuteUsingConnection(reader => reader.Read(), GetStoredProcedureCommand(commandText, parameters));
+            return ExecuteReaderExecuteUsingConnection(reader => reader.Read(), GetStoredProcedureCommand(commandText, parameters));
         }
 
-        private TResult ExecuteUsingConnection<TResult>(Func<IDataReader, TResult> retrieve, IDbCommand command)
+        public bool HasAffect(string commandText, params IDbDataParameter[] parameters)
+        {
+            return ExecuteNonQueryExecuteUsingConnection(GetStoredProcedureCommand(commandText, parameters)) > 0;
+        }
+
+        private int ExecuteNonQueryExecuteUsingConnection(IDbCommand command)
+        {
+            using (
+                var connection =
+                    GetConnection(_options.ConnectionString))
+            {
+                connection.Open();
+                command.Connection = connection;
+
+                return command.ExecuteNonQuery();
+            }
+        }
+
+        private TResult ExecuteReaderExecuteUsingConnection<TResult>(Func<IDataReader, TResult> retrieve, IDbCommand command)
         {
             using (
                 var connection =

@@ -11,6 +11,8 @@ namespace SolutionsAI.DatabaseTools
 
         bool HasResult(string commandText, params IDbDataParameter[] parameters);
 
+        bool HasAffect(string commandText, params IDbDataParameter[] parameters);
+
         IDbDataParameter GetDataParameter(string name, object value);
     }
 }

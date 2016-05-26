@@ -31,6 +31,7 @@ namespace SolutionsAI.BusinessLogic
         {
             serviceCollection.AddTransient<GetAllProfilesCommand>();
             serviceCollection.AddTransient<GetProfileByEmailCommand>();
+            serviceCollection.AddTransient<UpdateProfileCommand>();
         }
 
         private static void AddUserCommandsRegistrations(this IServiceCollection serviceCollection)

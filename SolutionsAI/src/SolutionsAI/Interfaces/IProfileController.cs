@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNet.Mvc;
 using SolutionsAI.Domain;
 using SolutionsAI.Response;
 
@@ -22,5 +21,12 @@ namespace SolutionsAI.Interfaces
         /// <param name="email"></param>
         /// <returns>User profile</returns>
         GenericResponse<Profile> Get(string email);
+
+        /// <summary>
+        /// Update existing profile
+        /// </summary>
+        /// <param name="profile">Updated profile</param>
+        /// <returns>Updated profile</returns>
+        GenericResponse<Profile> EditProfile(Profile profile);
     }
 }

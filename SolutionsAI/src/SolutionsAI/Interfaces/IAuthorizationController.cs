@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
-using SolutionsAI.Domain;
+﻿using SolutionsAI.Domain;
 using SolutionsAI.Response;
 
 namespace SolutionsAI.Interfaces
@@ -13,6 +12,6 @@ namespace SolutionsAI.Interfaces
         /// Sign in method
         /// </summary>
         /// <param name="user">Data required for authentication</param>
-        BaseResponse Authorize([FromBody] User user);
+        BaseResponse Authorize(User user);
     }
 }

@@ -61,7 +61,6 @@ namespace SolutionsAI.DataInterface.Commands.Base
             finally
             {
                 State = CommandState.Executed;
-                
             }
         }
 

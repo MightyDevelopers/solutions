@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
-using SolutionsAI.Domain;
+﻿using SolutionsAI.Domain;
 using SolutionsAI.Response;
 
 namespace SolutionsAI.Interfaces
@@ -13,6 +12,6 @@ namespace SolutionsAI.Interfaces
         /// Register new User
         /// </summary>
         /// <param name="user"></param>
-        BaseResponse Register([FromBody] User user);
+        BaseResponse Register(User user);
     }
 }

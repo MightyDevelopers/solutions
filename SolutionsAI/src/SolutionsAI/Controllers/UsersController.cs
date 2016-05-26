@@ -22,7 +22,12 @@ namespace SolutionsAI.Controllers
         [AllowAnonymous]
         public BaseResponse Register([FromBody] User user)
         {
-            return this.GetGenericResponse(() => UserService.CreateUser(user));
+            var response = this.GetGenericResponse(() => UserService.CreateUser(user), false);
+            if (response.Success)
+            {
+                AuthorizationUtility.SignIn(HttpContext.Authentication, user);
+            }
+            return response;
         }
     }
 }

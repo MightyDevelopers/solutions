@@ -6,8 +6,9 @@ namespace SolutionsAI.BusinessLogic.Services.Interface
 {
     public interface IProfileService
     {
-        CommandResult<Profile> GetUserProfile(string email);
+        CommandResult<Profile> GetProfile(string email);
+        CommandResult<Profile> UpdateProfile(Profile profile);
 
-        CommandResult<IEnumerable<Profile>> GetAllUsers();
+        CommandResult<IEnumerable<Profile>> GetAllProfiles();
     }
 }

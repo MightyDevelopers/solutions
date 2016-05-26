@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using Microsoft.AspNet.Mvc;
 using SolutionsAI.DataInterface.Commands.Base;
@@ -10,23 +11,37 @@ namespace SolutionsAI.Utility
     {
         public static GenericResponse<TResult> GetGenericResponse<TResult>(
             this Controller controller,
-            Func<CommandResult<TResult>> executeCommand)
+            Func<CommandResult<TResult>> executeCommand,
+            bool checkAuthority,
+            string email = null)
         {
-            try
+            if (checkAuthority 
+                && !string.IsNullOrWhiteSpace(email) 
+                && controller.User.HasAuthority(email))
             {
-                var commandResult = executeCommand();
-                controller.Response.StatusCode = (int)ResponseUtility.GetStatusCode(commandResult.State);
-                return ResponseUtility.Respond(commandResult);
-            }
-            catch (Exception)
-            {
-                controller.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-                return new GenericResponse<TResult>
+                try
                 {
-                    Success = false,
-                    ErrorMessage = "Internal Server Error"
-                };
+                    var commandResult = executeCommand();
+                    controller.Response.StatusCode = (int) ResponseUtility.GetStatusCode(commandResult.State);
+                    return ResponseUtility.Respond(commandResult);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    controller.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                    return new GenericResponse<TResult>
+                    {
+                        Success = false,
+                        ErrorMessage = "Internal Server Error"
+                    };
+                }
             }
+            controller.Response.StatusCode = (int) HttpStatusCode.Forbidden;
+            return new GenericResponse<TResult>
+            {
+                Success = false,
+                ErrorMessage = "You are not authorized to perform this operation"
+            };
         }
 
         public static BaseResponse GetBasicSuccessResponse(

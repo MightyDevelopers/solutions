@@ -28,18 +28,19 @@ namespace SolutionsAI.Controllers
         [HttpGet(Name = "GetProfile")]
         public GenericResponse<IEnumerable<Profile>> Get()
         {
-            return this.GetGenericResponse(() => ProfileRepository.GetAllUsers());
+            return this.GetGenericResponse(() => ProfileRepository.GetAllProfiles(), false);
         }
 
         [HttpGet("{email}")]
         public GenericResponse<Profile> Get(string email)
         {
-            if (User.Claims.Any(claim => claim.Type == ClaimTypes.Email && claim.Value == email))
-            {
-                return this.GetGenericResponse(()=>ProfileRepository.GetUserProfile(email));
-            }
-            Response.StatusCode = 403;
-            return null;
+            return this.GetGenericResponse(()=>ProfileRepository.GetProfile(email), true, email);
+        }
+
+        [HttpPut]
+        public GenericResponse<Profile> EditProfile([FromBody] Profile profile)
+        {
+            return this.GetGenericResponse(() => ProfileRepository.UpdateProfile(profile), true, profile.EMail);
         }
     }
 }
