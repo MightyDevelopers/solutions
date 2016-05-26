@@ -15,9 +15,7 @@ namespace SolutionsAI.Utility
             bool checkAuthority,
             string email = null)
         {
-            if (checkAuthority 
-                && !string.IsNullOrWhiteSpace(email) 
-                && controller.User.HasAuthority(email))
+            return controller.CheckAuthority(() =>
             {
                 try
                 {
@@ -35,6 +33,20 @@ namespace SolutionsAI.Utility
                         ErrorMessage = "Internal Server Error"
                     };
                 }
+            }, checkAuthority, email);
+        }
+
+        private static GenericResponse<TResult> CheckAuthority<TResult>(
+            this Controller controller,
+            Func<GenericResponse<TResult>> getResult,
+            bool checkAuthority,
+            string email = null)
+        {
+            if (checkAuthority
+                && !string.IsNullOrWhiteSpace(email)
+                && controller.User.HasAuthority(email))
+            {
+                return getResult();
             }
             controller.Response.StatusCode = (int) HttpStatusCode.Forbidden;
             return new GenericResponse<TResult>
