@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNet.Authorization;
+﻿using System.Net;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using SolutionsAI.BusinessLogic.Services.Interface;
-using SolutionsAI.Domain;
 using SolutionsAI.Interfaces;
 using SolutionsAI.Response;
+using SolutionsAI.Response.DTOs;
 using SolutionsAI.Utility;
 
 namespace SolutionsAI.Controllers
@@ -20,12 +21,21 @@ namespace SolutionsAI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public BaseResponse Register([FromBody] User user)
+        public BaseResponse Register([FromBody] CredentialsDTO credentialsDTO)
         {
-            var response = this.GetGenericResponse(() => UserService.CreateUser(user), false);
+            var existingUser = UserService.GetUser(credentialsDTO.ToGetRequest());
+            if (existingUser.Result != null)
+            {
+                return this.GetBasicFailureResponse(
+                    HttpStatusCode.Conflict, 
+                    "An account for this email already exists.");
+            }
+
+            var response = this.GetGenericResponse(
+                () => UserService.CreateUser(credentialsDTO.ToCreateRequest()), false);
             if (response.Success)
             {
-                AuthorizationUtility.SignIn(HttpContext.Authentication, user);
+                AuthorizationUtility.SignIn(HttpContext.Authentication, response.Result);
             }
             return response;
         }

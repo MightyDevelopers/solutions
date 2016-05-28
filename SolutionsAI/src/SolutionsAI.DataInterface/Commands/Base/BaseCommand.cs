@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using SolutionsAI.DatabaseTools;
 using SolutionsAI.DataInterface.Commands.Errors;
 
 namespace SolutionsAI.DataInterface.Commands.Base
 {
-    public abstract class BaseCommand<TEntity, TResult>: ISupportInitialize
+    public abstract class BaseCommand<TEntity, TResult>
     {
         protected readonly IRepository<TEntity> Repository;
         
@@ -15,25 +14,11 @@ namespace SolutionsAI.DataInterface.Commands.Base
         }
 
         protected abstract string Name { get; }
-        private CommandState State { get; set; }
-        private CommandResult<TResult> Result { get; set; }
+        protected CommandState State { get; set; }
+        protected CommandResult<TResult> Result { get; set; }
 
         public abstract void Execute();
         
-        public virtual void BeginInit()
-        {
-            State = CommandState.Created;
-            Result = new CommandResult<TResult>
-            {
-                State = CommandResultState.Pending
-            };
-        }
-
-        public void EndInit()
-        {
-            State = CommandState.Initialized;
-        }
-
         public CommandResult<TResult> GetResult()
         {
             Execute();
@@ -62,12 +47,6 @@ namespace SolutionsAI.DataInterface.Commands.Base
             {
                 State = CommandState.Executed;
             }
-        }
-
-        protected void Init()
-        {
-            BeginInit();
-            EndInit();
         }
     }
 }

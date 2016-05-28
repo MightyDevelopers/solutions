@@ -2,9 +2,11 @@
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using SolutionsAI.BusinessLogic.Services.Interface;
+using SolutionsAI.DataInterface.Commands.User;
 using SolutionsAI.Domain;
 using SolutionsAI.Interfaces;
 using SolutionsAI.Response;
+using SolutionsAI.Response.DTOs;
 using SolutionsAI.Utility;
 
 namespace SolutionsAI.Controllers
@@ -21,14 +23,22 @@ namespace SolutionsAI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public BaseResponse Authorize([FromBody] User user)
+        public BaseResponse Authorize([FromBody] CredentialsDTO request)
         {
-            if (UserService.UserExists(user).Result)
+            if (UserService.UserExists(request.ToCheckRequest()).Result)
             {
-                AuthorizationUtility.SignIn(HttpContext.Authentication, user);
+                var existingUser = UserService.GetUser(request.ToGetRequest());
+                AuthorizationUtility.SignIn(HttpContext.Authentication, existingUser.Result);
                 return this.GetBasicSuccessResponse();
             }
             return this.GetBasicFailureResponse(HttpStatusCode.Unauthorized);
+        }
+
+        [HttpDelete]
+        public BaseResponse SignOut()
+        {
+            AuthorizationUtility.SignOut(HttpContext.Authentication);
+            return this.GetBasicSuccessResponse();
         }
     }
 }

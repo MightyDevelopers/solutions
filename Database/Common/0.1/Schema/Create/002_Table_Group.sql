@@ -1,0 +1,12 @@
+CREATE TABLE `Group`
+(
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Name NVARCHAR(256) NOT NULL,
+    CreatorId INT NOT NULL,
+    CreationDate DATETIME
+);
+
+ALTER TABLE `Group`
+ADD CONSTRAINT `fk_Group_User`
+FOREIGN KEY (`CreatorId`)
+REFERENCES `User` (`Id`);

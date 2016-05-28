@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using SolutionsAI.DataInterface.Commands.Base;
+﻿using SolutionsAI.DataInterface.Commands.Base;
+using SolutionsAI.DataInterface.Requests.Implementations.ProfileRequests;
+using SolutionsAI.DataInterface.Requests.Implementations.UserRequests;
 using SolutionsAI.Domain;
 
 namespace SolutionsAI.BusinessLogic.Services.Interface
 {
     public interface IProfileService
     {
-        CommandResult<Profile> GetProfile(string email);
-        CommandResult<Profile> UpdateProfile(Profile profile);
-
-        CommandResult<IEnumerable<Profile>> GetAllProfiles();
+        CommandResult<User> GetProfile(GetUserRequest getProfileByEmailCommand);
+        CommandResult<User> UpdateProfile(UpdateProfileRequest updateProfileRequest);
     }
 }

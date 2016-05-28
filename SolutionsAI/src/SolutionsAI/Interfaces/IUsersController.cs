@@ -1,5 +1,5 @@
-﻿using SolutionsAI.Domain;
-using SolutionsAI.Response;
+﻿using SolutionsAI.Response;
+using SolutionsAI.Response.DTOs;
 
 namespace SolutionsAI.Interfaces
 {
@@ -11,7 +11,7 @@ namespace SolutionsAI.Interfaces
         /// <summary>
         /// Register new User
         /// </summary>
-        /// <param name="user"></param>
-        BaseResponse Register(User user);
+        /// <param name="credentialsDTO">Credentials</param>
+        BaseResponse Register(CredentialsDTO credentialsDTO);
     }
 }

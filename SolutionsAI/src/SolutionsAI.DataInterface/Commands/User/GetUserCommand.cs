@@ -4,18 +4,18 @@ using SolutionsAI.DataInterface.Requests.Implementations.UserRequests;
 
 namespace SolutionsAI.DataInterface.Commands.User
 {
-    public class CheckIfUserExistsCommand: 
-        BaseInitializableCommand<Domain.User, bool, CheckIfUserExistsRequest>
+    public class GetUserCommand: 
+        BaseInitializableCommand<Domain.User, Domain.User, GetUserRequest>
     {
-        public CheckIfUserExistsCommand(IRepository<Domain.User> repository) : base(repository)
+        public GetUserCommand(IRepository<Domain.User> repository) : base(repository)
         {
         }
 
-        protected override string Name => "CheckIfUserExistsCommand";
+        protected override string Name => "GetUserCommand";
 
         public override void Execute()
         {
-            HandleExecute(() => Repository.HasResult("GetUserByCredentials", 
+            HandleExecute(() => Repository.GetItem("GetUserByCredentials",
                 Repository.GetDataParameter("email", Request.Email),
                 Repository.GetDataParameter("password", Request.Password)));
         }

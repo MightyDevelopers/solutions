@@ -1,5 +1,5 @@
-﻿using SolutionsAI.Domain;
-using SolutionsAI.Response;
+﻿using SolutionsAI.Response;
+using SolutionsAI.Response.DTOs;
 
 namespace SolutionsAI.Interfaces
 {
@@ -11,7 +11,13 @@ namespace SolutionsAI.Interfaces
         /// <summary>
         /// Sign in method
         /// </summary>
-        /// <param name="user">Data required for authentication</param>
-        BaseResponse Authorize(User user);
+        /// <param name="credentialsDTO">Data required for authentication</param>
+        BaseResponse Authorize(CredentialsDTO credentialsDTO);
+
+        /// <summary>
+        /// Signs out
+        /// </summary>
+        /// <returns></returns>
+        BaseResponse SignOut();
     }
 }

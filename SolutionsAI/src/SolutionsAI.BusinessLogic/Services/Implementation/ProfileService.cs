@@ -1,43 +1,32 @@
-﻿using System.Collections.Generic;
-using SolutionsAI.BusinessLogic.Services.Interface;
+﻿using SolutionsAI.BusinessLogic.Services.Interface;
 using SolutionsAI.DataInterface.Commands.Base;
-using SolutionsAI.DataInterface.Commands.Errors;
-using SolutionsAI.DataInterface.Commands.Profile;
+using SolutionsAI.DataInterface.Requests.Implementations.ProfileRequests;
+using SolutionsAI.DataInterface.Requests.Implementations.UserRequests;
 using SolutionsAI.Domain;
 
 namespace SolutionsAI.BusinessLogic.Services.Implementation
 {
     public class ProfileService: IProfileService
     {
-        private readonly GetAllProfilesCommand _getAllProfilesCommand;
-        private readonly GetProfileByEmailCommand _getProfileByEmail;
-        private readonly UpdateProfileCommand _updateProfileCommand;
+        private readonly ICanExecuteRequest<GetUserRequest, User> _getProfileByEmail;
+        private readonly ICanExecuteRequest<UpdateProfileRequest, User> _updateProfileCommand;
 
         public ProfileService(
-            GetAllProfilesCommand getAllProfilesCommand, 
-            GetProfileByEmailCommand getProfileByEmail,
-            UpdateProfileCommand updateProfileCommand)
+            ICanExecuteRequest<GetUserRequest, User> getProfileByEmail,
+            ICanExecuteRequest<UpdateProfileRequest, User> updateProfileCommand)
         {
-            _getAllProfilesCommand = getAllProfilesCommand;
             _getProfileByEmail = getProfileByEmail;
             _updateProfileCommand = updateProfileCommand;
         }
 
-        public CommandResult<Profile> GetProfile(string email)
+        public CommandResult<User> GetProfile(GetUserRequest getProfileByEmailRequest)
         {
-            _getProfileByEmail.Init(email);
-            return _getProfileByEmail.GetResult();
+            return _getProfileByEmail.ExecuteRequest(getProfileByEmailRequest);
         }
 
-        public CommandResult<Profile> UpdateProfile(Profile profile)
+        public CommandResult<User> UpdateProfile(UpdateProfileRequest updateProfileRequest)
         {
-            _updateProfileCommand.Init(profile);
-            return _updateProfileCommand.GetResult();
-        }
-
-        public CommandResult<IEnumerable<Profile>> GetAllProfiles()
-        {
-            return _getAllProfilesCommand.GetResult();
+            return _updateProfileCommand.ExecuteRequest(updateProfileRequest);
         }
     }
 }

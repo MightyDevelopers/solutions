@@ -8,8 +8,8 @@ namespace SolutionsAI.DataInterface.DataRetrievers
     {
         public static void AddDataRetriverRegistrations(this IServiceCollection services)
         {
-            services.AddTransient<IDataRetriever<Profile>, ProfileDataRetriever>();
             services.AddTransient<IDataRetriever<User>, UserDataRetriever>();
+            services.AddTransient<IDataRetriever<Group>, GroupDataRetriever>();
         }
     }
 }

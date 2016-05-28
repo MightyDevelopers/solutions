@@ -1,8 +1,9 @@
 DELIMITER //
 
-CREATE PROCEDURE GetUserByEmail
+CREATE PROCEDURE GetUserByCredentials
 (
-    email nvarchar(256)
+    email NVARCHAR(256),
+    password NVARCHAR(64)
 )
 BEGIN
     SELECT 
@@ -15,7 +16,7 @@ BEGIN
         LastUpdateDate
     FROM
         User
-    WHERE Email = email;
+    WHERE Email = email and Password = password;
 END//
 
 DELIMITER ;

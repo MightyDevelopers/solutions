@@ -79,7 +79,8 @@ namespace SolutionsAI
             app.UseCors(builder =>
             {
                 builder
-                    .WithMethods("GET", "POST", "PUT", "DELETE")
+                    .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .AllowAnyHeader()
                     .AllowAnyOrigin();
             });
 

@@ -2,6 +2,7 @@
 using System.Data;
 using SolutionsAI.DatabaseTools;
 using SolutionsAI.Domain;
+using SolutionsAI.DatabaseTools.Utility;
 
 namespace SolutionsAI.DataInterface.DataRetrievers
 {
@@ -10,6 +11,10 @@ namespace SolutionsAI.DataInterface.DataRetrievers
         private int IdOrdinal { get; set; }
         private int EmailOrdinal { get; set; }
         private int PasswordOrdinal { get; set; }
+        private int RegistrationDateOrdinal { get; set; }
+        private int LastUpdateDateOrdinal { get; set; }
+        private int LastNameOrdinal { get; set; }
+        private int FirstNameOrdinal { get; set; }
 
         protected override User GetValueUsingOrdinals(IDataReader dataReader)
         {
@@ -17,7 +22,11 @@ namespace SolutionsAI.DataInterface.DataRetrievers
             {
                 Id = dataReader.GetInt32(IdOrdinal),
                 EMail = dataReader.GetString(EmailOrdinal),
-                Password = dataReader.GetString(PasswordOrdinal)
+                Password = dataReader.GetString(PasswordOrdinal),
+                FirstName = dataReader.GetNullable(FirstNameOrdinal),
+                LastName = dataReader.GetNullable(LastNameOrdinal),
+                LastUpdateDate = dataReader.GetUtcDateTime(LastUpdateDateOrdinal),
+                RegistrationDate = dataReader.GetUtcDateTime(RegistrationDateOrdinal)
             };
         }
 
@@ -27,7 +36,11 @@ namespace SolutionsAI.DataInterface.DataRetrievers
             {
                 Id = (int) dataReader["Id"],
                 EMail = dataReader["Email"].ToString(),
-                Password = dataReader["Password"].ToString()
+                Password = dataReader["Password"].ToString(),
+                FirstName = dataReader.GetNullable("FirstName"),
+                LastName = dataReader.GetNullable("LastName"),
+                LastUpdateDate = dataReader.GetUtcDateTime("LastUpdateDate"),
+                RegistrationDate = dataReader.GetUtcDateTime("RegistrationDate")
             };
         }
 
@@ -36,6 +49,10 @@ namespace SolutionsAI.DataInterface.DataRetrievers
             IdOrdinal = dataReader.GetOrdinal("Id");
             EmailOrdinal = dataReader.GetOrdinal("Email");
             PasswordOrdinal = dataReader.GetOrdinal("Password");
+            FirstNameOrdinal = dataReader.GetOrdinal("FirstName");
+            LastNameOrdinal = dataReader.GetOrdinal("LastName");
+            LastUpdateDateOrdinal = dataReader.GetOrdinal("LastUpdateDate");
+            RegistrationDateOrdinal = dataReader.GetOrdinal("RegistrationDate");
         }
     }
 }

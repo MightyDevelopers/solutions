@@ -1,6 +1,9 @@
 DELIMITER //
 
-CREATE PROCEDURE GetAllUsers()
+CREATE PROCEDURE GetUserById
+(
+    userId int
+)
 BEGIN
     SELECT 
         Id,
@@ -11,7 +14,8 @@ BEGIN
         RegistrationDate,
         LastUpdateDate
     FROM
-        User;
+        User
+    WHERE Id = userId;
 END//
 
 DELIMITER ;

@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using Microsoft.AspNet.Authorization;
+﻿using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using SolutionsAI.BusinessLogic.Services.Interface;
 using SolutionsAI.Domain;
 using SolutionsAI.Interfaces;
 using SolutionsAI.Response;
+using SolutionsAI.Response.DTOs;
 using SolutionsAI.Utility;
 
 namespace SolutionsAI.Controllers
@@ -19,28 +17,31 @@ namespace SolutionsAI.Controllers
     public class ProfilesController : Controller, IProfileController
     {
         private IProfileService ProfileRepository { get; set; }
+        private IUserService UserService { get; set; }
 
-        public ProfilesController(IProfileService profileRepository)
+        public ProfilesController(IProfileService profileRepository, IUserService userService)
         {
             ProfileRepository = profileRepository;
+            UserService = userService;
         }
 
-        [HttpGet(Name = "GetProfile")]
-        public GenericResponse<IEnumerable<Profile>> Get()
+        [HttpGet]
+        public GenericResponse<ProfileDTO> GetProfile()
         {
-            return this.GetGenericResponse(() => ProfileRepository.GetAllProfiles(), false);
-        }
-
-        [HttpGet("{email}")]
-        public GenericResponse<Profile> Get(string email)
-        {
-            return this.GetGenericResponse(()=>ProfileRepository.GetProfile(email), true, email);
+            return this.GetGenericResponse<User, ProfileDTO>(
+                userId => UserService.GetUser(userId.ToGetUserRequest()), false);
         }
 
         [HttpPut]
-        public GenericResponse<Profile> EditProfile([FromBody] Profile profile)
+        public GenericResponse<ProfileDTO> EditProfile([FromBody] ProfileDTO profile)
         {
-            return this.GetGenericResponse(() => ProfileRepository.UpdateProfile(profile), true, profile.EMail);
+            return this.GetGenericResponse<User, ProfileDTO>(
+                email =>
+                {
+                    profile.Email = email;
+                    return ProfileRepository.UpdateProfile(profile.ToUpdateRequest());
+                },
+                false);
         }
     }
 }
