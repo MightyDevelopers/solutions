@@ -1,0 +1,21 @@
+CREATE TABLE `Log`
+(
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    ProjectId INT NOT NULL,
+    LogTypeId INT NOT NULL,
+    Value MEDIUMTEXT NOT NULL,
+    IssuerId INT NOT NULL,
+    CreatedDate DATETIME NOT NULL
+);
+
+ALTER TABLE `Log`
+ADD CONSTRAINT fk_Log_LogType
+FOREIGN KEY (`LogTypeId`) REFERENCES `LogType` (`Id`);
+
+ALTER TABLE `Log`
+ADD CONSTRAINT fk_Log_User
+FOREIGN KEY (`IssuerId`) REFERENCES `User` (`Id`);
+
+ALTER TABLE `Log`
+ADD CONSTRAINT fk_Log_Project
+FOREIGN KEY (`ProjectId`) REFERENCES `Project` (`Id`);

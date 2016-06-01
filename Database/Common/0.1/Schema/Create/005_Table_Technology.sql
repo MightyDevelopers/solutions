@@ -1,6 +1,6 @@
-CREATE TABLE `Group`
+CREATE TABLE `Technology`
 (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Name NVARCHAR(256) NOT NULL,
-    CreationDate DATETIME
+    Description NVARCHAR(2056) NOT NULL
 );
