@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0-*",
+  "description": "Data Class Library",
+  "authors": [ "Volodymyr" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0"
+      }
+    }
+  },
+  "dependencies": {
+    "Microsoft.Extensions.OptionsModel": "1.0.0-rc1-final",
+    "MySql.Data": "6.9.8",
+    "SolutionsAI.Data.MySql": "1.0.0-*",
+    "SolutionsAI.DataInterface": "1.0.0-*",
+    "SolutionsAI.Domain": "1.0.0-*"
+  }
+}

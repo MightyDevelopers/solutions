@@ -1,0 +1,6 @@
+CREATE TABLE `Group`
+(
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Name NVARCHAR(256) NOT NULL,
+    CreationDate DATETIME
+);

@@ -38,3 +38,7 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+/SolutionsAI/PublishScripts
+/SolutionsAI/src/SolutionsAI/appsettings.json
+/SolutionsAI/.vs
+/SolutionsAI/*.user

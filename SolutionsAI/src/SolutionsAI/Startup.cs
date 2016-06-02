@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SolutionsAI.BusinessLogic;
+using SolutionsAI.DatabaseTools;
 
 namespace SolutionsAI
 {
@@ -36,7 +36,25 @@ namespace SolutionsAI
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services.AddAuthorization();
+
+            services.AddOptions();
+
+            services.Configure<ConnectionOptions>(Configuration);
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddCors();
+
+            services.AddSwaggerGen();
+
+            services.AddRepositoryRegistrations();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -47,13 +65,36 @@ namespace SolutionsAI
 
             app.UseIISPlatformHandler();
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
 
+            app.UseCors(builder =>
+            {
+                builder
+                    .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin();
+            });
+
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = "Cookie";
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = false;
+            });
+
             app.UseMvc();
+
+            app.UseSwaggerUi();
+            app.UseSwaggerGen();
         }
 
         // Entry point for the application.
