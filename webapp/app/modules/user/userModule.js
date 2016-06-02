@@ -1,0 +1,1 @@
+angular.module('solutionsApp.user', ['solutionsApp.user.services']);

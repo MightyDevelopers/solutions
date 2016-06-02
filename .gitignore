@@ -13,7 +13,8 @@ rerun.txt
 pickle-email-*.html
 
 #webapp ignores
-/webapp/lib
+/webapp/app/lib
+/webapp/node_modules
 #/webapp ignores
 
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo

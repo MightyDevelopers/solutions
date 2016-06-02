@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="solutionsApp">
+<head>
+	<title>Index App</title>
+	<!-- Bootstrap css -->
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css">
+	<!-- Font-Awesome css -->
+	<link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.css">
+	<!-- Common css -->
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<!-- Main Page css -->
+	<link rel="stylesheet" type="text/css" href="modules/main/css/main-page-style.css">
+	<!-- Main Layout css -->
+	<link rel="stylesheet" type="text/css" href="modules/main/css/main-layout-style.css">
+	<!-- Search Page css -->
+	<link rel="stylesheet" type="text/css" href="modules/search/css/search-page-style.css">
+</head>
+<body>
+	<div ng-include="'/modules/main/views/navbar.html'"></div>
+	
+	<div ui-view class=""></div>
+
+	<div ng-include="'/modules/main/views/footer.html'"></div>
+
+	<!-- Angular JS -->
+	<script type="text/javascript" src="lib/angular/angular.js"></script>
+	<!-- Angular Ui Router -->
+	<script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<!-- App Code -->
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="modules/user/userModule.js"></script>
+	<script type="text/javascript" src="modules/user/js/services.js"></script>
+	<!-- Search Module -->
+	<script type="text/javascript" src="modules/search/searchModule.js"></script>
+</body>
+</html>

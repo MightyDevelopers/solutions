@@ -1,0 +1,28 @@
+/*Navigation Bar*/
+.navb{
+	padding: 20px;
+	/*height: 80px;*/
+	background-color: #fff;
+	margin-bottom: 0;
+}
+.navb .form-control{
+	border-radius: 0;
+}
+.navb .form-control:focus{
+	border-color: #CF0B10;
+	box-shadow: none;
+}
+.navb .btn{
+	border-radius: 0;
+}
+/*Navigation Bar*/
+
+/*Footer*/
+.mp-footer{
+	/*height: 100px;*/
+	padding: 20px;
+}
+.mp-footer .devs{
+	color: #CF0B10;
+}
+/*Footer*/

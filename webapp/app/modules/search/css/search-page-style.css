@@ -1,0 +1,71 @@
+.search-row{
+	padding-top: 50px;
+}
+/*Filter Column*/
+.filter-column{
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+/*Filter Column*/
+.search-form input.form-control{
+	width: 500px;
+	border-radius: 0;
+	height: 43px;
+}
+.search-form > *{
+	margin: -2px;
+}
+.search-form input.form-control:focus{
+	border-color: #CF0B10;
+	box-shadow: none;
+}
+.search-form .btn{
+	width: 45px;
+	height: 44px;
+	border-radius: 0;
+}
+/*Search Items*/
+.search-item{
+	margin-bottom: 10px;
+	padding-left: 0;
+	background-color: #fff;
+	border-radius: 4px;
+}
+.search-item .answers{
+	padding: 0px;
+	padding-top: 50px;
+	/*padding: 0;*/
+}
+.search-item .item-title{
+	padding-left: 10px;
+	color: #CF0B10;
+}
+.search-item p{
+	padding-left: 25px;
+}
+.item-tags{
+	padding-left: 25px;
+	padding-bottom: 15px;
+}
+.item-tags .tag{
+	display: inline-block;
+	margin-right: 3px;
+	padding-left: 8px;
+	padding-top: 2px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+	border-radius: 4px;
+	color: #707070;
+	background-color: #e3e3e3;
+}
+.item-tags .tag:hover{
+	color: #fff;
+	background-color: #A50004;
+	cursor: pointer;
+}
+.search-item .author{
+	padding-right: 15px;
+	text-align: right;
+}
+/*Search Items*/

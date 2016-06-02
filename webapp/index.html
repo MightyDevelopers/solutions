@@ -1,15 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="solutionsApp">
 <head>
 	<title>Index App</title>
 	<!-- Bootstrap css -->
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css">
+	<!-- Common css -->
+	<link rel="stylesheet" type="text/css" href="app/css/common.css">
 </head>
 <body>
-	<div class="well">
+	<div ng-controller="TestCtrl" class="well border">
 		<span><b>It tastes like burning!</b></span>
-		<img src="app/img/ralph.png" width="50">
-		<span><b>I'm a brick!</b></span>
+		<img src="app/img/ralph1.jpg" width="50">
+		<span><b>I'm a brick! dasdsdasd</b></span>
+		<span>{{test}} sadasd</span>
+
+		<form class="form-inline pull-right" ng-submit="login()">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="login" ng-model="user.login">	
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="password" ng-model="user.password">	
+			</div>
+			<button type="submit" class="btn btn-primary">login</button>
+		</form>
 	</div>
+	<a ui-sref="profile">go to profile</a>
+	<p>asdasd</p>
+	<div class="container">
+		<div ui-view></div>
+	</div>
+	<!-- Angular JS -->
+	<script type="text/javascript" src="lib/angular/angular.js"></script>
+	<!-- Angular Ui Router -->
+	<script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<!-- App Code -->
+	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="app/modules/user/userModule.js"></script>
+	<script type="text/javascript" src="app/modules/user/js/services.js"></script>
 </body>
 </html>
