@@ -1,0 +1,13 @@
+.border{
+	border: 1px solid #eee;
+}
+
+.btn-ruby{
+	background-color: #CF0B10;
+	color: #fff;
+}
+.btn-ruby:hover, .btn-ruby:focus{
+	background-color: #A50004;
+	color: #fff;
+}
+

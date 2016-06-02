@@ -1,0 +1,8 @@
+{
+  "name": "Solutions",
+  "version": "1.0.0",
+  "dependencies": {
+    "ejs": "^2.4.2",
+    "express": "^4.13.4"
+  }
+}

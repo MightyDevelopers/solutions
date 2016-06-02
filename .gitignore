@@ -13,7 +13,8 @@ rerun.txt
 pickle-email-*.html
 
 #webapp ignores
-/webapp/lib
+/webapp/app/lib
+/webapp/node_modules
 #/webapp ignores
 
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
@@ -32,8 +33,8 @@ config/secrets.yml
 
 # if using bower-rails ignore default bower_components path bower.json files
 /vendor/assets/bower_components
-*.bowerrc
-bower.json
+#*.bowerrc
+#bower.json
 
 # Ignore pow environment settings
 .powenv
