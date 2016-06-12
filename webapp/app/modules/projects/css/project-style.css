@@ -1,0 +1,46 @@
+.proj-profile-container{
+	margin-top: 20px;
+}
+.property-name{
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #CF0B10;
+}
+.property-value{
+	margin-bottom: 5px;
+}
+.proj-overview{
+	margin-top: 20px;
+}
+.proj-manage-block .tab-pane  h3{
+	padding-left: 12px;
+}
+.proj-manage-block a:hover{
+	color: #CF0B10;
+}
+.step-list li{
+	font-size: 1.2em;
+}
+
+/*SOLUTION*/
+.solution-container{
+	margin-top: 50px;
+}
+.problem-author{
+	margin: 0px;
+}
+.solution-author{
+	padding-top: 20px;
+}
+.solution-author a{
+	/*margin-top: 20px;*/
+	font-size: 1.1em;
+}
+.left-top-border{
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+}
+.top-border{
+	border-top: 1px solid #eee;
+}
+/*SOLUTION*/

@@ -1,0 +1,77 @@
+<!-- .container -->
+<div class="container">
+	<!-- .row -->
+	<div class="row">
+		<!-- .col-md-12 -->
+		<div class="col-md-offset-1 col-md-11  solution-container">
+			<h2 class="ruby-text">CORS in web-service development</h2>
+			<div class="col-md-11 well">
+				<p>
+					I am bit new to webAPi and I want to implement CORS (Cross Origin Resource Sharing) on Web API. I am referring to this Microsoft link. They install a Nuget package using PM> Install-Package Microsoft.AspNet.Cors -Version 5.0.0-rc1 -Pre
+					However, I am using .NET Framework 4.0 and it is not working. Afterwards I used this Nuget command:
+					Install-Package Microsoft.AspNet.WebApi -Version 4.0.20710
+					But it does not contain the CORS class. So, do we have any other different way to implement CORS?
+				</p>
+				<div class="well pull-right problem-author">
+					<b class="ruby-text">asked by: </b><a>deadlyBob</a>
+					<br>
+					<div class="text-center"><b>May 13 '16 at 9:44</b></div>
+				</div>
+			</div>
+		</div><!-- /.col-md-12 -->
+	</div><!-- /.row -->
+	<!-- .row -->
+	<div class="row">
+		<!-- .col-md-12 -->
+		<div class="col-md-offset-1 col-md-11">
+			<div class="col-md-3 text-right">
+				<b>Author</b>
+			</div>
+			<div class="col-md-8">
+				<b>Solution</b>
+			</div>
+		</div>
+		<div class="col-md-offset-1 col-md-11">
+			<div class="col-md-3 solution-author top-border text-right">
+				<a href="#">Osanj</a>
+				<!-- <b>answered on:</b> -->
+				<br>
+				June 02 '16 at 10:01
+			</div>
+			<div class="col-md-9 left-top-border">
+				<h3 class="ruby-text">CORS using .NET approach</h3>
+				<p class="well">
+					Hey there, try to use only one of these return statements above. As you can see the first one return the Headers together and the another one don't. Let me know your inputs. Cheers...
+				</p>
+			</div>
+		</div>
+		<!-- DUMMY -->
+		<div class="col-md-offset-1 col-md-11">
+			<div class="col-md-3 solution-author text-right top-border">
+				<a href="#">Volod1995</a>
+				<br>
+				May 22 '16 at 15:37
+			</div>
+			<div class="col-md-9 left-top-border">
+				<h3 class="ruby-text">Adding Handler to cors</h3>
+				<p class="well">
+					You can add a handler to deal with this type of request.Create a class derive from "DelegatingHandler":...
+				</p>
+			</div>
+		</div>
+		<div class="col-md-offset-1 col-md-11">
+			<div class="col-md-3 solution-author text-right top-border">
+				<a href="#">redMen</a>
+				<br>
+				May 17 '16 at 12:45
+			</div>
+			<div class="col-md-9 left-top-border">
+				<h3 class="ruby-text">Changing "OPTIONS" method for cors in web-server</h3>
+				<p class="well">
+					The AJAX call you're doing to the Web API is triggering a Preflight check (HTTP verb "OPTIONS"). This needs to be handled by your system otherwise you'll get the 405 error. There are a few answers on how to do that here on SO, like:...
+				</p>
+			</div>
+		</div>
+		<!-- /DUMMY -->
+	</div><!-- /.row -->
+</div><!-- /.container
