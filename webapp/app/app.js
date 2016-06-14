@@ -18,6 +18,14 @@ angular.module('solutionsApp', ['ui.router','solutionsApp.user', 'solutionsApp.s
 			.state('search', {
 				url: '/search',
 				templateUrl: 'modules/search/views/search.html'
+			})
+			.state('project', {
+				url: '/project',
+				templateUrl: 'modules/projects/views/project-profile.html'
+			})
+			.state('solution',{
+				url: '/solution',
+				templateUrl: 'modules/projects/views/solution-list.html'
 			});
 	}])
 	.controller('TestCtrl', ['$scope', 'authService', function($scope, authService){
